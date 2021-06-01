@@ -1,0 +1,135 @@
+<script>	
+	function activaModal(msj) {
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("show");
+	}
+</script>
+<div class="container">
+	<div class="starter-template">
+		<div class="page-header"><h1>{titulo}</h1></div>
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h4>Editar configuración</h4>
+      </div>
+      <div class="panel-body">
+        <form class="form-horizontal" action="/{app_name}/turnoonline/guardar" method="post">
+          <div class="form-group">
+            <label for="denominacion" class="col-lg-2 control-label">Denominación</label>
+            <div class="col-lg-10">
+              <input type="text" class="form-control" id="denominacion" name="denominacion" value="{denominacion}" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="fecha_desde" class="col-lg-2 control-label">Fecha Desde</label>
+            <div class="col-lg-4">
+              <input type="date" class="form-control" id="fecha_desde" name="fecha_desde" value="{fecha_desde}" required>
+            </div>
+            <label for="fecha_hasta" class="col-lg-2 control-label">Fecha Hasta</label>
+            <div class="col-lg-4">
+              <input type="date" class="form-control" id="fecha_hasta" name="fecha_hasta" value="{fecha_hasta}" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="hora_desde" class="col-lg-2 control-label">Hora Desde</label>
+            <div class="col-lg-4">
+              <input type="time" class="form-control" id="hora_desde" name="hora_desde" value="{hora_desde}" required>
+            </div>
+            <label for="hora_hasta" class="col-lg-2 control-label">Hora Hasta</label>
+            <div class="col-lg-4">
+              <input type="time" class="form-control" id="hora_hasta" name="hora_hasta" value="{hora_hasta}" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="duracion_turno" class="col-lg-2 control-label">Duración</label>
+            <div class="col-lg-4">
+              <input type="number" class="form-control" id="duracion_turno" name="duracion_turno" value="{duracion_turno}" required>
+            </div>
+          </div>              
+          <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+              <input type="hidden" id="turnoonline_id" name="turnoonline_id" value="{turnoonline_id}" required>
+              <input type="hidden" id="estado" name="estado" value="{estado}" required>
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+	</div>
+</div>
+<div id="modal_msj" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content panel-danger">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><strong>&iexcl;Atención!</strong></h4>
+      </div>
+      <div class="modal-body" id="div_modal_contenido">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+      $('#tabla').DataTable( {
+				 "aaSorting": [[ 1, "desc" ]],
+         "iDisplayLength":10,
+          "language": {
+            "decimal":        ".",
+            "emptyTable":     "No hay datos disponibles",
+            "info":           "Mostrando _START_ al _END_ de _TOTAL_ registros",
+            "infoEmpty":      "Mostrando 0 al 0 de 0 registros",
+            "infoFiltered":   "(filtrados de _MAX_ registros totales)",
+            "infoPostFix":    "",
+            "thousands":      ",",
+            "lengthMenu":     "Ver _MENU_ registros",
+            "loadingRecords": "Cargando...",
+            "processing":     "Procesando...",
+            "search":         "Filtrar:",
+            "zeroRecords":    "No se encontraron registros coincidentes",
+            "paginate": {
+                "first":      "Inicio",
+                "last":       "Fin",
+                "next":       "Siguiente",
+                "previous":   "Anterior"
+            },
+            "aria": {
+                "sortAscending":  ": activate to sort column ascending",
+                "sortDescending": ": activate to sort column descending"
+            }
+          }
+      } );
+    } );
+</script>
+<script>	
+	function activaModal(msj) {
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("show");
+	}
+  
+  function editarEvento(evento_id) {
+    var formEvento = $.ajax({
+      url: '/{app_name}/eventos/traer_form_editar_evento_ajax/' + evento_id,
+      dataType: 'text',
+      async: false
+    }).responseText;
+    console.log(formEvento);
+    document.getElementById('div_modal_contenido').innerHTML = formEvento;
+		$('#modal_msj').modal("show");
+  }
+  
+  function consultarEvento(evento_id) {
+    var formEvento = $.ajax({
+      url: '/{app_name}/eventos/consultar_evento_ajax/' + evento_id,
+      dataType: 'text',
+      async: false
+    }).responseText;
+    
+    document.getElementById('div_modal_contenido').innerHTML = formEvento;
+		$('#modal_msj').modal("show");
+  }
+</script>

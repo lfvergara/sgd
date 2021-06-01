@@ -1,0 +1,49 @@
+<script>	
+	$(window).on('load',function() {
+		var msj = "{mensaje}";
+		document.getElementById('txt_msj').innerHTML=msj;
+		$('#modal_msj').modal("{display}");
+	});
+</script>
+<div class="container">
+	<div class="starter-template">
+		<div class="page-header"><h1>{titulo}</h1></div>
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h4>Ingresar Código de Barras</h4>
+      </div>
+      <div class="panel-body">
+        <form class="form-horizontal" action="/{app_name}/solicitudturnoonline/ingresar_turno" method="post">
+          <div class="form-group">
+            <label for="barcode" class="col-lg-2 control-label">Turno</label>
+            <div class="col-lg-10">
+              <input type="password" class="form-control" id="barcode" name="barcode" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+              <button type="submit" class="btn btn-primary">Atender</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+	</div>
+</div>
+<div id="modal_msj" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content panel-danger">
+      <div class="modal-header panel-heading">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><strong>&iexcl;Atención!</strong></h4>
+      </div>
+      <div class="modal-body">
+        <p id="txt_msj"></p>
+        <a href="/{app_name}/archivos/genera_comprobante" class="btn btn-info" style="display: {btn_comprobante_display};">Descargar Comprobante</a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>

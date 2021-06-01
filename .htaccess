@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule !(^static) controller.php
+Options -Indexes

@@ -1,0 +1,187 @@
+<!-- Chart.js -->
+<script src="{theme_path}/js/Chart.js"></script>
+<div class="container" style="width: 1600px;">
+	<div class="starter-template">
+		<div class="page-header"><h1>{titulo}</h1></div>
+    
+		<div class="row">
+			<div class="col-md-5">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h4>Reporte detallado por fecha</h4>
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal" name="datos" method="post" action="/{app_name}/solicitudturnoonline/descargar_por_fecha">
+							<div class="form-group">
+							  <label for="fecha" class="col-lg-2 control-label">Fecha</label>
+								<div class="col-lg-7">
+									<input type="date" class="form-control" name="fecha" id="fecha">
+								</div>
+                <div class="col-lg-2">
+									<button type="submit" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Exportar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h4>Estadísticas por estado de solicitud del día</h4>
+          </div>
+          <div class="panel-body">
+			      <div class="col-md-8" style="border-right: solid #BDBDBD 1px;">
+              <div id="canvas-holder">
+                <canvas id="chartPieEstado" style="width: 300px;"></canvas>
+              </div>
+            </div>
+			      <div class="col-md-4">
+              <h5>PENDIENTES</h5>
+              <span class="badge badge-pill badge-dark" style="font-size: 25px; background-color: #2c3e50; width: 100%;">{pendientes}</span>
+              <h5>AUSENTES</h5>
+              <span class="badge badge-pill badge-danger" style="font-size: 25px; background-color: #E74C3C; width: 100%;">{ausentes}</span>
+              <h5>ATENDIDOS</h5>
+              <span class="badge badge-pill badge-danger" style="font-size: 25px; background-color: #43846B; width: 100%;">{atendidos}</span>
+            </div>            
+          </div>
+        </div>	
+			</div>
+			<div class="col-md-4">
+        <div class="panel panel-warning hidden-print" style="display: {panel_encuesta_display};">
+					<div class="panel-heading">
+						<h4>Atendidos por Usuario del día</h4>
+					</div>
+					<div class="panel-body">
+					  <center>
+              <div id="canvas-holder">
+                <canvas id="chartPieUsuario" style="width: 300px;"></canvas>
+              </div>
+            </center>
+					</div>
+				</div>
+        <div class="panel panel-primary">
+					<div class="panel-heading">
+						<h4>Reporte por fecha y rango horario</h4>
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal" name="datos" method="post" action="/{app_name}/solicitudturnoonline/descargar_por_fecha_hora">
+							<div class="form-group">
+							  <label for="fecha" class="col-lg-3 control-label">Fecha</label>
+								<div class="col-lg-8" style="margin-bottom: 8px;">
+									<input type="date" class="form-control" name="fecha" id="fecha">
+								</div>
+                <label for="fecha" class="col-lg-3 control-label">Hora desde</label>
+								<div class="col-lg-8" style="margin-bottom: 8px;">
+									<input type="time" class="form-control" name="hora_desde" id="hora_desde">
+								</div>
+                <label for="fecha" class="col-lg-3 control-label">Hora hasta</label>
+								<div class="col-lg-8" style="margin-bottom: 8px;">
+									<input type="time" class="form-control" name="hora_hasta" id="hora_hasta">
+								</div>
+                <div class="col-lg-11" style="text-align: right;">
+									<button type="submit" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Exportar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+        <!--
+        <div class="panel panel-primary">
+					<div class="panel-heading">
+						<h4>Reporte por fecha y estado</h4>
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal" name="datos" method="post" action="/{app_name}/reportes/descargar_matriculado_estado_actualizacion">
+							<div class="form-group">
+							  <label for="fecha" class="col-lg-2 control-label">Fecha</label>
+                <div class="col-lg-10" style="margin-bottom: 8px;">
+									<input type="date" class="form-control" name="fecha" id="fecha">
+								</div>
+							  <label for="estado" class="col-lg-2 control-label">Estado</label>
+								<div class="col-lg-6">
+									<select name="estado" id="estado" class="form-control" required aria-required="true">
+										<option value="0">PENDIENTES</option>
+										<option value="1">ATENDIDOS</option>
+										<option value="2">AUSENTES</option>
+									</select>
+								</div>
+                <div class="col-lg-4" style="text-align: right;">
+									<button type="submit" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Exportar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+        -->
+			</div>
+      <div class="col-md-3">
+        <div class="panel panel-danger hidden-print" style="display: {panel_encuesta_display};">
+					<div class="panel-heading">
+						<h4>Atendidos por Área del día</h4>
+					</div>
+					<div class="panel-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Área</th>
+                  <th scope="col">#</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tbl_cantidad_area}
+              </tbody>
+            </table>
+					</div>
+				</div>
+        <div class="panel panel-danger hidden-print" style="display: {panel_encuesta_display};">
+					<div class="panel-heading">
+						<h4>Atendidos por Trámite del día</h4>
+					</div>
+					<div class="panel-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Gestión</th>
+                  <th scope="col">#</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tbl_cantidad_gestion}
+              </tbody>
+            </table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+  var pieDataUsuario = [
+    {graf_usuario_solicitud}
+  ];
+  var ctxm = document.getElementById("chartPieUsuario").getContext("2d");
+  window.myPie = new Chart(ctxm).Pie(pieDataUsuario);	
+</script>
+<script>
+  var pieDataEstado = [
+    {
+      value: {pendientes},
+      color:"#2c3e50",
+      highlight: "#0c62ab",
+      label: "PENDIENTES"
+    },
+    {
+      value: {atendidos},
+      color:"#43846B",
+      highlight: "#0c62ab",
+      label: "ATENDIDOS"
+    },
+    {
+      value: {ausentes},
+      color:"#E74C3C",
+      highlight: "#0c62ab",
+      label: "AUSENTES"
+    }
+  ];
+  var ctxm = document.getElementById("chartPieEstado").getContext("2d");
+  window.myPie = new Chart(ctxm).Pie(pieDataEstado);	
+</script>

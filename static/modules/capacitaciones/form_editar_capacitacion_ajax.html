@@ -1,0 +1,32 @@
+<form class="form-horizontal" action="/{app_name}/capacitaciones/actualizar" method="post">
+  <div class="form-group">
+    <label for="denominacion" class="col-lg-2 control-label">Capacitación</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="denominacion" name="denominacion" value="{denominacion}" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="ubicacion" class="col-lg-2 control-label">Detalle</label>
+    <div class="col-lg-10">
+      <textarea class="form-control" id="detalle" name="detalle" required>{detalle}</textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="ubicacion" class="col-lg-2 control-label">URL</label>
+    <div class="col-lg-10">
+      <textarea class="form-control" id="url" name="url" required>{url}</textarea>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="fecha" class="col-lg-2 control-label">Fecha</label>
+    <div class="col-lg-10">
+      <input type="date" class="form-control" id="fecha" name="fecha" value="{fecha}" required>
+    </div>
+  </div>
+  <div class="form-group" style="text-align: right;">
+    <div class="col-lg-10 col-lg-offset-2">
+      <button type="submit" class="btn btn-primary">Editar</button>
+      <input type="hidden" class="form-control" id="capacitacion_id" name="capacitacion_id" value="{capacitacion_id}" required>
+    </div>
+  </div>
+</form>
