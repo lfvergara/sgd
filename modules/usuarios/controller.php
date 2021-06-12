@@ -191,7 +191,7 @@ class UsuariosController {
 		$this->model->actualizar_matriculado();    
     
     $emailHelper = new EmailHelper();
-    $emailHelper->envia_email_actualizacion_matriculado($matriculado);
+    //$emailHelper->envia_email_actualizacion_matriculado($matriculado);HOLA
     
     header("Location: /" . APP_NAME . "/usuarios/mis_datos/1");
   }
@@ -222,7 +222,7 @@ class UsuariosController {
     $_SESSION["sesion.actualizacion"] = 2;
     
     $emailHelper = new EmailHelper();
-    $emailHelper->envia_email_actualizacion_matriculado($matriculado);
+    //$emailHelper->envia_email_actualizacion_matriculado($matriculado);HOLA
     
     header("Location: /" . APP_NAME . "/usuarios/panel");
   }
