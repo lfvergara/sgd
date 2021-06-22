@@ -292,7 +292,7 @@ class ArchivosView extends View{
 		print $template;
 	}
   
-  function mostrar_listado_autorizacion_usuario($datos, $estado) {
+  	function mostrar_listado_autorizacion_usuario($datos, $estado) {
 		$gui = file_get_contents("static/modules/archivos/listar_autorizaciones_usuario.html");
 		$menu = file_get_contents("static/menu.html");
 		
@@ -307,8 +307,9 @@ class ArchivosView extends View{
 		print $template;
 	}
   
-  function mostrar_listado_validacion($datos, $estado, $array_msj) {
+  	function mostrar_listado_validacion($datos, $estado, $array_msj) {
 		$gui = file_get_contents("static/modules/archivos/listar_validaciones.html");
+		$tbl_validaciones = file_get_contents("static/modules/archivos/tbl_validaciones.html");
 		$menu = file_get_contents("static/menu.html");
 		
 		$restricciones = $this->genera_menu();
@@ -316,14 +317,15 @@ class ArchivosView extends View{
 		
 		$datos = (!is_array($datos)) ? array() : $datos;
 		$dict = array("{titulo}"=>"Listado de documentos", "{estado}"=>$estado);
-		$render = $this->render_regex('repetir', $gui, $datos);
-    $render = $this->render($array_msj, $render);
+		$tbl_validaciones = $this->render_regex('repetir', $tbl_validaciones, $datos);
+		$render = str_replace('{tbl_validaciones}', $tbl_validaciones, $gui);
+    	$render = $this->render($array_msj, $render);
 		$render = $this->render($dict, $render);
 		$template = $this->render_template($menu, $render);
 		print $template;
 	}
   
-  function mostrar_listado_legalizar($datos, $estado) {
+  	function mostrar_listado_legalizar($datos, $estado) {
 		$gui = file_get_contents("static/modules/archivos/listar_legalizar.html");
 		$menu = file_get_contents("static/menu.html");
 		

@@ -569,22 +569,22 @@ class ArchivosController {
 		$this->view->mostrar_listado_legalizar_usuario($datos, $estado);
 	}
   
-  function listar_validar($argumentos) {
+  	function listar_validar($argumentos) {
 		SessionHandling::check();
-    SessionHandling::checkGrupo(4);		
+    	SessionHandling::checkGrupo(4);		
     
-    switch($argumentos[0]) {
+    	switch($argumentos[0]) {
 			case 1:
 				$array_msj = array("{mensaje}"=>"",
-													 "{display}"=>"none");
+								   "{display}"=>"none");
 				break;
 			case 2:
 				$array_msj = array("{mensaje}"=>"El documento fue validado correctamente!",
-													 "{display}"=>"show");
+								   "{display}"=>"show");
 				break;
 			default:
 				$array_msj = array("{mensaje}"=>"",
-													 "{display}"=>"none");
+								   "{display}"=>"none");
 				break;
 		}
     
