@@ -52,25 +52,13 @@
 								<tr>
 									<th>#</th>
 									<th>Estado</th>
-                  <th>Fecha</th>
+                  					<th>Fecha</th>
 									<th>Comentario</th>
 									<th>Archivo</th>
 								</tr>
 							</thead>
 							<tbody>
-								<!--repetir-->
-								<tr>
-									<td>{seguimiento_id}</td>
-									<td>{estado}</td>
-                  <th>{fecha}</th>
-									<td>{comentario}</td>
-									<td>
-										<a href="/sgd/archivos/ver_archivo_blank/{archivo_id}/{seguimiento_id}" target="_blank">
-											<i class="{icono}"></i>
-										</a>
-									</td>
-								</tr>
-								<!--repetir-->
+								{tbl_seguimiento}
 							</tbody>
 						</table>
 					</div>

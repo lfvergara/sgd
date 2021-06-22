@@ -156,6 +156,7 @@ class ArchivosView extends View{
 	
 	function mostrar_detalle($datos, $seguimiento, $html) {
 		$gui = file_get_contents("static/modules/archivos/{$html}.html");
+		$tbl_seguimiento = file_get_contents("static/modules/archivos/tbl_seguimiento.html");
 		$menu = file_get_contents("static/menu.html");
 		
 		$restricciones = $this->genera_menu();
@@ -171,7 +172,6 @@ class ArchivosView extends View{
 			}
 		}
 		
-		print_r($seguimiento);exit;
 
 		if(FileHandler::check_file($carpeta, 'comprobante_pago')==true) {
 			$icono_comprobante = "fa fa-file";
@@ -189,7 +189,8 @@ class ArchivosView extends View{
 		$dict = array("{titulo}"=>"Detalle del documento", "{disabled}"=>$disabled);
 		$dict = array_merge($dict, $this->set_dict($datos));
 
-		$render = $this->render_regex('repetir', $gui, $seguimiento);
+		$tbl_seguimiento = $this->render_regex('repetir', $tbl_seguimiento, $seguimiento);
+		$render = str_replace("{tbl_seguimiento}", $tbl_seguimiento, $gui);
 		$render = str_replace("{icono_comprobante}", $icono_comprobante, $render);
 		$render = str_replace("{comprobante_url}", $comprobante_url, $render);
 		$render = $this->render($dict, $render);
