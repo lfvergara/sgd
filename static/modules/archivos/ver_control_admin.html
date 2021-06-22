@@ -23,7 +23,7 @@
 					</div>
 				</div>
 			</div>
-      <div class="col-lg-4">
+      		<div class="col-lg-4">
 				<div class="panel panel-warning hidden-print">
 					<div class="panel-heading">
 						<h4>
@@ -31,44 +31,44 @@
 						</h4>
 					</div>
 					<div class="panel-body">
-            <p>
+            			<p>
 							Activo Corriente: <strong>${activo_corriente}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 							Pasivo Corriente: <strong>${pasivo_corriente}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</p>
-            <p>
+            			<p>
 							Activo No Corriente: <strong>${activo_nocorriente}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 							Pasivo No Corriente: <strong>${pasivo_nocorriente}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</p>
-            <p>
+            			<p>
 							Activo: <strong>${activo}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 							Pasivo: <strong>${pasivo}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</p>
-            <p>
+            			<p>
 							Patrimonio Neto: <strong>${patrimonio_neto}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 							Bienes de Uso: <strong>${bienes_uso}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</p>
-            <p>Reexpresión del valor de Origen de Bs de Uso: <strong>${origen_bienes_uso}</strong></p>
-            <p>Reexpresión de las depreciasiones acumuladas de Bs de Uso: <strong>${depreciacion_bienes_uso}</strong></p>
-            <p>Resultado de reexpresión  de Bs de Uso: <strong>${resultado_reexpresion_bienes_uso}</strong></p>
-            <p>
+			            <p>Reexpresión del valor de Origen de Bs de Uso: <strong>${origen_bienes_uso}</strong></p>
+			            <p>Reexpresión de las depreciasiones acumuladas de Bs de Uso: <strong>${depreciacion_bienes_uso}</strong></p>
+			            <p>Resultado de reexpresión  de Bs de Uso: <strong>${resultado_reexpresion_bienes_uso}</strong></p>
+			            <p>
 							Ventas Netas: <strong>${venta_neta}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 							Resultado Final: <strong>${resultado_final}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						</p>
 					</div>
 				</div>
 			</div>
-      <div class="col-lg-4">
+      		<div class="col-lg-4">
 				<div class="panel panel-warning hidden-print">
 					<div class="panel-heading">
 						<h4>+ Información</h4>
 					</div>
 					<div class="panel-body">
-            <p>Entidad Bancaria: <strong>{entidad}</strong></p>
-            <p>Cuenta: <strong>{cuenta}</strong></p>
-            <p>Nro Cuenta: <strong>{numero_cuenta}</strong></p>
-            <p>Nro Comprobante: <strong>{numero_comprobante}</strong></p>
-            <p>Importe: <strong>${importe}</strong></p>
-            <p>Comentarios: <strong>{comentario}</strong></p>
+			            <p>Entidad Bancaria: <strong>{entidad}</strong></p>
+			            <p>Cuenta: <strong>{cuenta}</strong></p>
+			            <p>Nro Cuenta: <strong>{numero_cuenta}</strong></p>
+			            <p>Nro Comprobante: <strong>{numero_comprobante}</strong></p>
+			            <p>Importe: <strong>${importe}</strong></p>
+			            <p>Comentarios: <strong>{comentario}</strong></p>
 					</div>
 				</div>
 			</div>
@@ -91,19 +91,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<!--repetir-->
-								<tr>
-									<td>{seguimiento_id}</td>
-									<td>{estado}</td>
-									<th>{fecha}</th>
-									<td>{comentario}</td>
-									<td class="hidden-print">
-										<a href="/{app_name}/archivos/ver_archivo_blank/{archivo_id}/{seguimiento_id}" target="_blank">
-											<i class="{icono}"></i>
-										</a>
-									</td>
-								</tr>
-								<!--repetir-->
+								{tbl_seguimiento_control_admin}
 							</tbody>
 						</table>
 					</div>
@@ -167,18 +155,18 @@
 	}
 </script>
 <div id="modal_msj" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content panel-danger">
-      <div class="modal-header panel-heading">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title"><strong>&iexcl;Atención!</strong></h4>
-      </div>
-      <div class="modal-body">
-        <p id="txt_msj"></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-dismiss="modal" onclick="javascript:document.getElementById('estado_id').focus();">Aceptar</button>
-      </div>
-    </div>
-  </div>
+  	<div class="modal-dialog">
+	    <div class="modal-content panel-danger">
+	      	<div class="modal-header panel-heading">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title"><strong>&iexcl;Atención!</strong></h4>
+	      	</div>
+	      	<div class="modal-body">
+	        	<p id="txt_msj"></p>
+	      	</div>
+	      	<div class="modal-footer">
+	        	<button type="button" class="btn btn-warning" data-dismiss="modal" onclick="javascript:document.getElementById('estado_id').focus();">Aceptar</button>
+	      	</div>
+	    </div>
+  	</div>
 </div>

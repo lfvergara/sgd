@@ -1172,7 +1172,7 @@ class ArchivosController {
 			$array_exportacion[] = $array_temp;
 		}
     
-    ExcelReport()->extraer_informe($array_exportacion, "Reporte por estado");
+    	ExcelReport()->extraer_informe($array_exportacion, "Reporte por estado");
 	}
 
 	function buscar() {

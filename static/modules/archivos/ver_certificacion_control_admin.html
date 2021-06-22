@@ -26,12 +26,12 @@
 						<h4>+ Información</h4>
 					</div>
 					<div class="panel-body">
-            <p>Entidad Bancaria: <strong>{entidad}</strong></p>
-            <p>Cuenta: <strong>{cuenta}</strong></p>
-            <p>Nro Cuenta: <strong>{numero_cuenta}</strong></p>
-            <p>Nro Comprobante: <strong>{numero_comprobante}</strong></p>
-            <p>Importe: <strong>${importe}</strong></p>
-            <p>Comentarios: <strong>{comentario}</strong></p>
+			            <p>Entidad Bancaria: <strong>{entidad}</strong></p>
+			            <p>Cuenta: <strong>{cuenta}</strong></p>
+			            <p>Nro Cuenta: <strong>{numero_cuenta}</strong></p>
+			            <p>Nro Comprobante: <strong>{numero_comprobante}</strong></p>
+			            <p>Importe: <strong>${importe}</strong></p>
+			            <p>Comentarios: <strong>{comentario}</strong></p>
 					</div>
 				</div>
 			</div>
@@ -54,19 +54,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<!--repetir-->
-								<tr>
-									<td>{seguimiento_id}</td>
-									<td>{estado}</td>
-									<th>{fecha}</th>
-									<td>{comentario}</td>
-									<td class="hidden-print">
-										<a href="/{app_name}/archivos/ver_archivo_blank/{archivo_id}/{seguimiento_id}" target="_blank">
-											<i class="{icono}"></i>
-										</a>
-									</td>
-								</tr>
-								<!--repetir-->
+								{tbl_seguimiento_control_admin}
 							</tbody>
 						</table>
 					</div>
