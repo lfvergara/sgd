@@ -467,6 +467,7 @@ class ArchivosView extends View{
 	}
   
   	function consultar_control_admin($datos, $seguimiento, $estado_id) {
+  		print_r($seguimiento);exit;
 		$tipo = $datos["tipo"];
 		$gui_html = ($tipo == 1) ? "ver_control_admin" : "ver_certificacion_control_admin";
 		$gui = file_get_contents("static/modules/archivos/{$gui_html}.html");
