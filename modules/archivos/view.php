@@ -200,6 +200,7 @@ class ArchivosView extends View{
   
   function mostrar_detalle_autorizar($datos, $seguimiento, $matriculado) {
 		$gui = file_get_contents("static/modules/archivos/mostrar_detalle_autorizar.html");
+		$tbl_detalle_autorizar = file_get_contents("static/modules/archivos/tbl_detalle_autorizar.html");
 		$menu = file_get_contents("static/menu.html");
 		
 		$restricciones = $this->genera_menu();
@@ -223,21 +224,22 @@ class ArchivosView extends View{
 			$comprobante_url = "#";
 		}
   
-    if ($html == 'ver') {
-      $msj = 'SU DOCUMENTO NO FUE ACEPTADO TODAVIA';
-      $gui = str_replace('{barcode}', $msj, $gui); 
-    }
+	    if ($html == 'ver') {
+	      	$msj = 'SU DOCUMENTO NO FUE ACEPTADO TODAVIA';
+	      	$gui = str_replace('{barcode}', $msj, $gui); 
+	    }
     
 		$dict = array("{titulo}"=>"Detalle del documento", "{disabled}"=>$disabled);
 		$dict = array_merge($dict, $this->set_dict($datos));
-    if (empty($matriculado[0])) {
-      $matriculado[0] = array('correoelectronico'=>'',
-                           'telefono'=>'',
-                           'celular'=>'');
-    }
+    	if (empty($matriculado[0])) {
+      		$matriculado[0] = array('correoelectronico'=>'',
+                           			'telefono'=>'',
+                           			'celular'=>'');
+    	}
     
-    $matriculado = $this->set_dict($matriculado[0]);
-		$render = $this->render_regex('repetir', $gui, $seguimiento);
+    	$matriculado = $this->set_dict($matriculado[0]);
+		$tbl_detalle_autorizar = $this->render_regex('repetir', $tbl_detalle_autorizar, $seguimiento);
+		$render = str_replace("{tbl_detalle_autorizar}", $tbl_detalle_autorizar, $gui);
 		$render = str_replace("{icono_comprobante}", $icono_comprobante, $render);
 		$render = str_replace("{comprobante_url}", $comprobante_url, $render);
 		$render = $this->render($dict, $render);

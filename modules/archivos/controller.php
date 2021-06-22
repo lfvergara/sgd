@@ -265,14 +265,14 @@ class ArchivosController {
   
   	function ver_detalle_autorizar($argumentos) {
 		SessionHandling::check();
-    SessionHandling::actualizar();
-    SessionHandling::checkGrupo(3);
+    	SessionHandling::actualizar();
+    	SessionHandling::checkGrupo(3);
 		$this->model->archivo_id = $argumentos[0];
 		$this->model->estado_id = $argumentos[1];
-    $archivo = $this->model->get();
+    	$archivo = $this->model->get();
 		$seguimiento = $this->model->ver_detalle();
-    $matriculado = $this->model->traer_matriculado($archivo['matricula']);
-    $this->view->mostrar_detalle_autorizar($archivo, $seguimiento, $matriculado);
+    	$matriculado = $this->model->traer_matriculado($archivo['matricula']);
+    	$this->view->mostrar_detalle_autorizar($archivo, $seguimiento, $matriculado);
 	}
 	
 	function editar($argumentos) {
