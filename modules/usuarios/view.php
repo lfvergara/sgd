@@ -5,7 +5,7 @@ class UsuariosView extends View{
 
 	function mostrar_mantenimiento($usuarios, $grupos) {
 		$gui = file_get_contents("static/modules/usuarios/mantenimiento.html");
-		$tbl_mantenimiento = file_get_contents("static/modules/usuarios/tbl_mantenimiento.html");
+		$tbl_usuarios = file_get_contents("static/modules/usuarios/tbl_usuarios.html");
 		$slt_grupos = file_get_contents("static/modules/usuarios/slt_grupos.html");
 		$menu = file_get_contents("static/menu.html");		
 		$restricciones = $this->genera_menu();
@@ -13,9 +13,9 @@ class UsuariosView extends View{
 		$dict = array("{titulo}"=>"Mantenimiento de usuarios");		
 		if(!is_array($usuarios)){$usuarios=array();}
 		if(!is_array($grupos)){$grupos=array();}		
-		$tbl_mantenimiento = $this->render_regex("repetir", $tbl_mantenimiento, $usuarios);
+		$tbl_usuarios = $this->render_regex("repetir", $tbl_usuarios, $usuarios);
 		$slt_grupos = $this->render_regex("grupos", $slt_grupos, $grupos);
-    	$render = str_replace('{tbl_mantenimiento}', $tbl_mantenimiento, $gui);
+    	$render = str_replace('{tbl_usuarios}', $tbl_usuarios, $gui);
     	$render = str_replace('{slt_grupos}', $slt_grupos, $render);
 		$render = $this->render($dict, $render);
     	$render = str_replace('{theme_path}', THEME_PATH, $render);
