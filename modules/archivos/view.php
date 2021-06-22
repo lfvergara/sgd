@@ -498,8 +498,8 @@ class ArchivosView extends View{
 		
 		$dict = array("{titulo}"=>"Detalle del documento", "{disabled}"=>$disabled);
 		$dict = array_merge($dict, $this->set_dict($datos));
+  		print_r($seguimiento);exit;
 		$tbl_seguimiento_control_admin = $this->render_regex('repetir', $tbl_seguimiento_control_admin, $seguimiento);
-  		print_r($tbl_seguimiento_control_admin);exit;
 		$render = str_replace('{tbl_seguimiento_control_admin}', $tbl_seguimiento_control_admin, $gui);
 		$render = str_replace("{gui_btn_print}", $gui_btn_print, $render);
 		$render = $this->render($dict, $render);
