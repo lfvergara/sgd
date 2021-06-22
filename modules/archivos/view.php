@@ -638,10 +638,10 @@ class ArchivosView extends View{
   
   	function mostrar_form_buscar($datos=array()) {
 		$gui = file_get_contents("static/modules/archivos/buscar.html");
+		$tbl_buscar = file_get_contents("static/modules/archivos/tbl_buscar.html");
 		$menu = file_get_contents("static/menu.html");
 		$grupo_id = $_SESSION["sesion.grupo_id"];
-    	$administrador_display = ($grupo_id == 1) ? "block;" : "none;";
-    
+    	$administrador_display = ($grupo_id == 1) ? "block;" : "none;";    
 		$restricciones = $this->genera_menu();
 		$menu = $this->render($restricciones, $menu);
 		
@@ -656,8 +656,8 @@ class ArchivosView extends View{
 		}
 		
 		$dict = array("{titulo}"=>"Buscar documento", "{administrador}"=>$administrador_display);
-
-		$render = $this->render_regex('repetir', $gui, $datos);
+		$tbl_buscar = $this->render_regex('repetir', $tbl_buscar, $datos);
+		$render = str_replace("{tbl_buscar}", $tbl_buscar, $gui);
 		$render = $this->render($dict, $render);
 		$template = $this->render_template($menu, $render);
 		print $template;
