@@ -432,6 +432,7 @@ class ArchivosView extends View{
 		$tipo = $datos["tipo"];
 		$gui_html = ($tipo == 1) ? "ver" : "ver_certificacion";
 		$gui = file_get_contents("static/modules/archivos/{$gui_html}.html");
+		$tbl_seguimiento = file_get_contents("static/modules/archivos/tbl_seguimiento.html");
 		$menu = file_get_contents("static/menu.html");
 		
 		$restricciones = $this->genera_menu();
@@ -447,19 +448,20 @@ class ArchivosView extends View{
 			}
 		}
     
-    if ($estado_id == 6) {
-      $gui_barcode = file_get_contents("static/modules/archivos/barcode.html");
-		  $gui_btn_print = "block";
-      $gui = str_replace('{barcode}', $gui_barcode, $gui);
-    } else {
-		  $gui_btn_print = "none";
-      $msj = 'SU DOCUMENTO NO FUE ACEPTADO TODAVIA';
-      $gui = str_replace('{barcode}', $msj, $gui);    
-    }
+    	if ($estado_id == 6) {
+      		$gui_barcode = file_get_contents("static/modules/archivos/barcode.html");
+		  	$gui_btn_print = "block";
+      		$gui = str_replace('{barcode}', $gui_barcode, $gui);
+    	} else {
+		  	$gui_btn_print = "none";
+      		$msj = 'SU DOCUMENTO NO FUE ACEPTADO TODAVIA';
+      		$gui = str_replace('{barcode}', $msj, $gui);    
+    	}
 		
 		$dict = array("{titulo}"=>"Detalle del documento", "{disabled}"=>$disabled);
 		$dict = array_merge($dict, $this->set_dict($datos));
-		$render = $this->render_regex('repetir', $gui, $seguimiento);
+		$tbl_seguimiento = $this->render_regex('repetir', $tbl_seguimiento, $seguimiento);
+		$render = str_replace("{tbl_seguimiento}", $tbl_seguimiento, $gui);
 		$render = str_replace("{gui_btn_print}", $gui_btn_print, $render);
 		$render = $this->render($dict, $render);
 		$template = $this->render_template($menu, $render);
