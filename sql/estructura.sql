@@ -607,9 +607,14 @@ ALTER TABLE `estados`
 -- Indices de la tabla `eventos`
 --
 ALTER TABLE `eventos`
+  ADD PRIMARY KEY (`evento_id`);
   ADD KEY `agenda_id` (`evento_id`);
 
 --
+-- Indices de la tabla `correos`
+--
+ALTER TABLE `eventos`
+  ADD PRIMARY KEY (`matricula`);
 -- Indices de la tabla `experiencianivel`
 --
 ALTER TABLE `experiencianivel`
