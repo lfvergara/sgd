@@ -361,7 +361,7 @@ class ArchivosView extends View{
 		print $template;
 	}
   
-  function mostrar_listado_reingresar($datos, $estado, $array_msj) {
+  	function mostrar_listado_reingresar($datos, $estado, $array_msj) {
 		$gui = file_get_contents("static/modules/archivos/listar_reingresar.html");
 		$menu = file_get_contents("static/menu.html");
 		
@@ -372,12 +372,12 @@ class ArchivosView extends View{
 		$dict = array("{titulo}"=>"Listado de documentos", "{estado}"=>$estado);
 		$render = $this->render_regex('repetir', $gui, $datos);
 		$render = $this->render($dict, $render);
-    $render = $this->render($array_msj, $render);
+    	$render = $this->render($array_msj, $render);
 		$template = $this->render_template($menu, $render);
 		print $template;
 	}
   
-  function mostrar_listado_corregir($datos, $estado, $array_msj) {
+  	function mostrar_listado_corregir($datos, $estado, $array_msj) {
 		$gui = file_get_contents("static/modules/archivos/listar_corregir.html");
 		$menu = file_get_contents("static/menu.html");
 		
@@ -388,13 +388,14 @@ class ArchivosView extends View{
 		$dict = array("{titulo}"=>"Listado de documentos", "{estado}"=>$estado);
 		$render = $this->render_regex('repetir', $gui, $datos);
 		$render = $this->render($dict, $render);
-    $render = $this->render($array_msj, $render);
+    	$render = $this->render($array_msj, $render);
 		$template = $this->render_template($menu, $render);
 		print $template;
 	}
   
-  function mostrar_listado_documentos_pendientes($datos, $estado, $array_msj) {
+  	function mostrar_listado_documentos_pendientes($datos, $estado, $array_msj) {
 		$gui = file_get_contents("static/modules/archivos/listar_documentos_pendientes.html");
+		$tbl_documentos_pendientes = file_get_contents("static/modules/archivos/tbl_documentos_pendientes.html");
 		$menu = file_get_contents("static/menu.html");
 		
 		$restricciones = $this->genera_menu();
@@ -402,15 +403,17 @@ class ArchivosView extends View{
 		
 		$datos = (!is_array($datos)) ? array() : $datos;
 		$dict = array("{titulo}"=>"Listado de documentos", "{estado}"=>$estado);
-		$render = $this->render_regex('repetir', $gui, $datos);
+		$tbl_documentos_pendientes = $this->render_regex('repetir', $tbl_documentos_pendientes, $datos);
+		$render = str_replace("{tbl_documentos_pendientes}", $tbl_documentos_pendientes, $gui);
 		$render = $this->render($dict, $render);
-    $render = $this->render($array_msj, $render);
+    	$render = $this->render($array_msj, $render);
 		$template = $this->render_template($menu, $render);
 		print $template;
 	}
 	
 	function mostrar_pendientes($datos, $estado) {
 		$gui = file_get_contents("static/modules/archivos/listar_pendientes.html");
+		$tbl_pendientes = file_get_contents("static/modules/archivos/tbl_pendientes.html");
 		$menu = file_get_contents("static/menu.html");
 		
 		$restricciones = $this->genera_menu();
@@ -418,7 +421,8 @@ class ArchivosView extends View{
 		
 		$datos = (!is_array($datos)) ? array() : $datos;
 		$dict = array("{titulo}"=>"Listado de documentos", "{estado}"=>$estado);
-		$render = $this->render_regex('repetir', $gui, $datos);
+		$tbl_documentos_pendientes = $this->render_regex('repetir', $tbl_pendientes, $datos);
+		$render = str_replace("{tbl_pendientes}", $tbl_pendientes, $gui);
 		$render = $this->render($dict, $render);
 		$template = $this->render_template($menu, $render);
 		print $template;

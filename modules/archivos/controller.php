@@ -399,52 +399,52 @@ class ArchivosController {
 		$this->view->mostrar_listado_autorizacion($datos, $estado, $array_msj);
 	}
   
-  function autorizar_usuario() {
+  	function autorizar_usuario() {
 		SessionHandling::check();
 		$datos = $this->model->listar_autorizacion_usuario();
 		$estado = "Pendiente evaluación";
 		$this->view->mostrar_listado_autorizacion_usuario($datos, $estado);
 	}
   
-  function reingresar_documento($argumentos) {
+  	function reingresar_documento($argumentos) {
 		SessionHandling::check();
-    SessionHandling::actualizar();
-    switch($argumentos[0]) {
+    	SessionHandling::actualizar();
+    	switch($argumentos[0]) {
 			case 1:
 				$array_msj = array("{mensaje}"=>"",
-													 "{display}"=>"none",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"none",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 			case 2:
 				$array_msj = array("{mensaje}"=>"Sólo se admiten archivos PDF.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 			case 3:
 				$array_msj = array("{mensaje}"=>"El archivo es demasiado grande. El límite de subida es 20MB.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 			case 4:
 				$array_msj = array("{mensaje}"=>"El documento se ha reingresado correctamente. Muchas gracias.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"block");
-        break;
-      case 9:
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"block");
+        		break;
+      		case 9:
 				$array_msj = array("{mensaje}"=>"Ha ocurrido un error, pruebe nuevamente por favor. Disculpe las molestias, muchas gracias.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
-        break;
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
+        	break;
 		}
 		
-    $this->model->estado_id = 4;
+    	$this->model->estado_id = 4;
 		$datos1 = $this->model->listar_estado_usuario();
-    if(!is_array($datos1)) $datos1 = array();
-    $this->model->estado_id = 7;
+    	if(!is_array($datos1)) $datos1 = array();
+    	$this->model->estado_id = 7;
 		$datos2 = $this->model->listar_estado_usuario();
-    if(!is_array($datos2)) $datos2 = array();
-    $datos = array_merge($datos1, $datos2);
-    $estado = "Documentos pendientes";
+	    if(!is_array($datos2)) $datos2 = array();
+	    $datos = array_merge($datos1, $datos2);
+	    $estado = "Documentos pendientes";
 		$this->view->mostrar_listado_documentos_pendientes($datos, $estado, $array_msj);
 	}
   
