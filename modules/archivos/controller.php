@@ -1177,7 +1177,7 @@ class ArchivosController {
 
 	function buscar() {
 		SessionHandling::check();
-    SessionHandling::actualizar();
+    	SessionHandling::actualizar();
 		if($_POST) {
 			$busqueda = filter_input(INPUT_POST, 'palabra');
 			$busqueda = "%{$busqueda}%";
@@ -1188,13 +1188,12 @@ class ArchivosController {
 		$this->view->mostrar_form_buscar($datos);
 	}
   
-  function admin_control_archivos() {
+  	function admin_control_archivos() {
 		SessionHandling::check();
-    SessionHandling::checkGrupo(4);
+    	SessionHandling::checkGrupo(4);
     
-    $busqueda = "% %";
-    $datos = $this->model->search($busqueda);
-		
+    	$busqueda = "% %";
+    	$datos = $this->model->search($busqueda);
 		if(!is_array($datos)) $datos = array();
 		$this->view->mostrar_admin_control($datos);
 	}

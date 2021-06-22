@@ -663,9 +663,10 @@ class ArchivosView extends View{
   
   function mostrar_admin_control($datos=array()) {
 		$gui = file_get_contents("static/modules/archivos/listar_admin_control.html");
+		$tbl_listar_admin_control = file_get_contents("static/modules/archivos/tbl_listar_admin_control.html");
 		$menu = file_get_contents("static/menu.html");
 		$grupo_id = $_SESSION["sesion.grupo_id"];
-    $administrador_display = ($grupo_id == 1) ? "block;" : "none;";
+    	$administrador_display = ($grupo_id == 1) ? "block;" : "none;";
     
 		$restricciones = $this->genera_menu();
 		$menu = $this->render($restricciones, $menu);
@@ -681,8 +682,8 @@ class ArchivosView extends View{
 		}
 		
 		$dict = array("{titulo}"=>"Listado de documentos en circuito", "{administrador}"=>$administrador_display);
-
-		$render = $this->render_regex('repetir', $gui, $datos);
+		$tbl_listar_admin_control = $this->render_regex('repetir', $tbl_listar_admin_control, $datos);
+		$render = str_replace('{tbl_listar_admin_control}', $tbl_listar_admin_control, $gui);
 		$render = $this->render($dict, $render);
 		$template = $this->render_template($menu, $render);
 		print $template;
