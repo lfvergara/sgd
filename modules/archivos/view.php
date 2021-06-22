@@ -278,6 +278,7 @@ class ArchivosView extends View{
 	
 	function mostrar_listado_autorizacion($datos, $estado, $array_msj) {
 		$gui = file_get_contents("static/modules/archivos/listar_autorizaciones.html");
+		$tbl_autorizaciones = file_get_contents("static/modules/archivos/tbl_autorizaciones.html");
 		$menu = file_get_contents("static/menu.html");
 		
 		$restricciones = $this->genera_menu();
@@ -285,7 +286,8 @@ class ArchivosView extends View{
 		
 		$datos = (!is_array($datos)) ? array() : $datos;
 		$dict = array("{titulo}"=>"Listado de documentos", "{estado}"=>$estado);
-		$render = $this->render_regex('repetir', $gui, $datos);
+		$tbl_autorizaciones = $this->render_regex('repetir', $tbl_autorizaciones, $datos);
+		$render = str_replace("{tbl_autorizaciones}", $tbl_autorizaciones, $gui);
 		$render = $this->render($dict, $render);
 		$render = $this->render($array_msj, $render);
 		$template = $this->render_template($menu, $render);
@@ -294,6 +296,7 @@ class ArchivosView extends View{
   
   	function mostrar_listado_autorizacion_usuario($datos, $estado) {
 		$gui = file_get_contents("static/modules/archivos/listar_autorizaciones_usuario.html");
+		$tbl_autorizaciones = file_get_contents("static/modules/archivos/tbl_autorizaciones.html");
 		$menu = file_get_contents("static/menu.html");
 		
 		$restricciones = $this->genera_menu();
@@ -301,7 +304,8 @@ class ArchivosView extends View{
 		
 		$datos = (!is_array($datos)) ? array() : $datos;
 		$dict = array("{titulo}"=>"Listado de documentos", "{estado}"=>$estado);
-		$render = $this->render_regex('repetir', $gui, $datos);
+		$tbl_autorizaciones = $this->render_regex('repetir', $tbl_autorizaciones, $datos);
+		$render = str_replace("{tbl_autorizaciones}", $tbl_autorizaciones, $gui);
 		$render = $this->render($dict, $render);
 		$template = $this->render_template($menu, $render);
 		print $template;

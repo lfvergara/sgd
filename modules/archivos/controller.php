@@ -353,43 +353,43 @@ class ArchivosController {
 	
 	function autorizar($argumentos) {
 		SessionHandling::check();
-    SessionHandling::checkGrupo(3);		
+    	SessionHandling::checkGrupo(3);		
     
-    switch($argumentos[0]) {
+    	switch($argumentos[0]) {
 			case 1:
 				$array_msj = array("{mensaje}"=>"",
-													 "{display}"=>"none",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"none",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 			case 2:
 				$array_msj = array("{mensaje}"=>"Sólo se admiten archivos PDF.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 			case 3:
 				$array_msj = array("{mensaje}"=>"El archivo es demasiado grande. El límite de subida es 20MB.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 			case 4:
 				$array_msj = array("{mensaje}"=>"El documento se ha observado correctamente. Muchas gracias.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"block");
-        break;
-      case 5:
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"block");
+        	break;
+      		case 5:
 				$array_msj = array("{mensaje}"=>"El documento se ha aceptado correctamente. Muchas gracias.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"block");
-        break;
-      case 9:
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"block");
+        		break;
+      		case 9:
 				$array_msj = array("{mensaje}"=>"Ha ocurrido un error, pruebe nuevamente por favor. Disculpe las molestias, muchas gracias.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
-        break;
-      default:
+												"{display}"=>"show",
+												"{btn_comprobante_display}"=>"none");
+        		break;
+      		default:
 				$array_msj = array("{mensaje}"=>"",
-													 "{display}"=>"none",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"none",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 		}
     
