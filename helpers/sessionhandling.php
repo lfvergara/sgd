@@ -73,7 +73,7 @@ class SessionHandling {
       SessionHandling::destroy();
     }
     
-    if(!$_SERVER['HTTP_REFERER']) SessionHandling::destroy();
+    //if(!$_SERVER['HTTP_REFERER']) SessionHandling::destroy();
   }
   
   static function checkGrupo($grupo_id) {

@@ -260,7 +260,6 @@ class ArchivosController {
 		
 		$archivo = $this->model->get();
 		$seguimiento = $this->model->ver_detalle();
-		print_r($seguimiento);exit;
 		$this->view->mostrar_detalle($archivo, $seguimiento, $html);
 	}
   

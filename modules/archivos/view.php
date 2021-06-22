@@ -171,6 +171,8 @@ class ArchivosView extends View{
 			}
 		}
 		
+		print_r($seguimiento);exit;
+
 		if(FileHandler::check_file($carpeta, 'comprobante_pago')==true) {
 			$icono_comprobante = "fa fa-file";
 			$comprobante_url = "comprobante_pago";
@@ -179,10 +181,10 @@ class ArchivosView extends View{
 			$comprobante_url = "#";
 		}
   
-    if ($html == 'ver') {
-      $msj = 'SU DOCUMENTO NO FUE ACEPTADO TODAVIA';
-      $gui = str_replace('{barcode}', $msj, $gui); 
-    }
+	    if ($html == 'ver') {
+	      	$msj = 'SU DOCUMENTO NO FUE ACEPTADO TODAVIA';
+	      	$gui = str_replace('{barcode}', $msj, $gui); 
+	    }
     
 		$dict = array("{titulo}"=>"Detalle del documento", "{disabled}"=>$disabled);
 		$dict = array_merge($dict, $this->set_dict($datos));
