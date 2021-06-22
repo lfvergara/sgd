@@ -14,38 +14,38 @@ class ArchivosController {
 
 	function ingresar($argumentos) {
 		SessionHandling::check();
-    SessionHandling::actualizar();
+    	SessionHandling::actualizar();
 		switch($argumentos[0]) {
 			case 1:
 				$array_msj = array("{mensaje}"=>"",
-													 "{display}"=>"none",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"none",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 			case 2:
 				$array_msj = array("{mensaje}"=>"Sólo se admiten archivos PDF.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 			case 3:
 				$array_msj = array("{mensaje}"=>"El archivo es demasiado grande. El límite de subida es 20MB.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 			case 4:
 				$array_msj = array("{mensaje}"=>"El documento se ha subido correctamente. Muchas gracias.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"block");
-        break;
-      case 5:
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"block");
+		        break;
+	      	case 5:
 				$array_msj = array("{mensaje}"=>"El número de CUIT es incorrecto, por favor modifique el mismo. Muchas gracias.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
-        break;
-      case 9:
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
+		        break;
+	      	case 9:
 				$array_msj = array("{mensaje}"=>"Ha ocurrido un error, pruebe nuevamente por favor. Disculpe las molestias, muchas gracias.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
-        break;
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
+		        break;
 		}
 		
 		$this->model->tipo = 1;
@@ -58,39 +58,38 @@ class ArchivosController {
   
   function ingresar_con_ajuste($argumentos) {
 		SessionHandling::check();
-
-    SessionHandling::actualizar();
+    	SessionHandling::actualizar();
 		switch($argumentos[0]) {
 			case 1:
 				$array_msj = array("{mensaje}"=>"",
-													 "{display}"=>"none",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"none",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 			case 2:
 				$array_msj = array("{mensaje}"=>"Sólo se admiten archivos PDF.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 			case 3:
 				$array_msj = array("{mensaje}"=>"El archivo es demasiado grande. El límite de subida es 20MB.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 			case 4:
 				$array_msj = array("{mensaje}"=>"El documento se ha subido correctamente. Muchas gracias.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"block");
-        break;
-      case 5:
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"block");
+        		break;
+      		case 5:
 				$array_msj = array("{mensaje}"=>"El número de CUIT es incorrecto, por favor modifique el mismo. Muchas gracias.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
-        break;
-      case 9:
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
+        		break;
+      		case 9:
 				$array_msj = array("{mensaje}"=>"Ha ocurrido un error, pruebe nuevamente por favor. Disculpe las molestias, muchas gracias.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
-        break;
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
+        		break;
 		}
 		
 		$this->model->tipo = 1;
@@ -103,45 +102,45 @@ class ArchivosController {
 	  
 	function ingresar_certificacion($argumentos) {
 		SessionHandling::check();
-    SessionHandling::actualizar();
+    	SessionHandling::actualizar();
 		switch($argumentos[0]) {
 			case 1:
 				$array_msj = array("{mensaje}"=>"",
-													 "{display}"=>"none",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"none",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 			case 2:
 				$array_msj = array("{mensaje}"=>"Sólo se admiten archivos PDF.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 			case 3:
 				$array_msj = array("{mensaje}"=>"El archivo es demasiado grande. El límite de subida es 20MB.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 			case 4:
 				$array_msj = array("{mensaje}"=>"El documento se ha subido correctamente. Muchas gracias.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"block");
-        break;
-      case 5:
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"block");
+        		break;
+      		case 5:
 				$array_msj = array("{mensaje}"=>"El número de CUIT es incorrecto, por favor modifique el mismo. Muchas gracias.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
-        break;
-      case 9:
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
+        		break;
+      		case 9:
 				$array_msj = array("{mensaje}"=>"Ha ocurrido un error, pruebe nuevamente por favor. Disculpe las molestias, muchas gracias.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
-        break;
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
+        		break;
 		}
     
 		$this->model->tipo = 2;
 		$tipos_trabajo = $this->model->listar_tipos_trabajo();
 		$entidades = $this->model->listar_entidades();
 		$cuentas = $this->model->listar_cuentas();
-    $cantidad_pendientes = $this->model->cantidad_pendientes();
+    	$cantidad_pendientes = $this->model->cantidad_pendientes();
 		$this->view->mostrar_formulario_ingresar_certificacion($tipos_trabajo, $entidades, $cuentas, $array_msj, $cantidad_pendientes);
 	}
 	
@@ -149,75 +148,75 @@ class ArchivosController {
 		SessionHandling::check();
 		$tipo_id = filter_input(INPUT_POST, "tipo_id");
 		$array_temp = array(1,2,34,35,36,37,39);
-    $documento = filter_input(INPUT_POST, 'documento');
+    	$documento = filter_input(INPUT_POST, 'documento');
     
-    $matricula = $_SESSION["sesion.matricula"];
-    if ($matricula == '') header("Location: /" . APP_NAME . "/archivos/{$redirect}/9");      
-    if (is_null($matricula)) header("Location: /" . APP_NAME . "/archivos/{$redirect}/9");      
-    if (empty($matricula)) header("Location: /" . APP_NAME . "/archivos/{$redirect}/9");  
+    	$matricula = $_SESSION["sesion.matricula"];
+	    if ($matricula == '') header("Location: /" . APP_NAME . "/archivos/{$redirect}/9");      
+	    if (is_null($matricula)) header("Location: /" . APP_NAME . "/archivos/{$redirect}/9");      
+	    if (empty($matricula)) header("Location: /" . APP_NAME . "/archivos/{$redirect}/9");  
       
     
-    if (in_array($tipo_id, $array_temp)) {
-		  $redirect = "ingresar";
-		  $txt_tipo = "Ingresar Documento: EECC";
-      $tmp_detalle = "Razón Social: " . $_POST['denominacion'] . "<br> CUIT: " . $documento . "<br> Ejercicio: " . $_POST['ejercicio'];
-    } else {
-		  $redirect = "ingresar_certificacion";
-		  $txt_tipo = "Ingresar Documento: Otros";      
-      $tmp_detalle = "Razón Social: " . $_POST['denominacion'] . "<br> CUIT: " . $documento;
-    }
+    	if (in_array($tipo_id, $array_temp)) {
+		  	$redirect = "ingresar";
+		 	$txt_tipo = "Ingresar Documento: EECC";
+      		$tmp_detalle = "Razón Social: " . $_POST['denominacion'] . "<br> CUIT: " . $documento . "<br> Ejercicio: " . $_POST['ejercicio'];
+    	} else {
+		  	$redirect = "ingresar_certificacion";
+		  	$txt_tipo = "Ingresar Documento: Otros";      
+      		$tmp_detalle = "Razón Social: " . $_POST['denominacion'] . "<br> CUIT: " . $documento;
+    	}
     
 		$mimes_permitidos = "application/pdf";
-    //$bandera_cuit = $this->verificar_cuit_guardar($_POST["documento"]);
+    	//$bandera_cuit = $this->verificar_cuit_guardar($_POST["documento"]);
     
-      if($_FILES['archivo']['error']==0 AND $_FILES['comprobante_pago']['error']==0) {
-        $archivo = $_FILES['archivo'];
-        $formato = $archivo['type'];
-        $tamano = $archivo['size'];
+      	if($_FILES['archivo']['error']==0 AND $_FILES['comprobante_pago']['error']==0) {
+        	$archivo = $_FILES['archivo'];
+        	$formato = $archivo['type'];
+        	$tamano = $archivo['size'];
 
-        $comprobante_pago = $_FILES['comprobante_pago'];
-        $formato_comprobante_pago = $comprobante_pago['type'];
-        $limite_filesize = 20 * 1048576;
+        	$comprobante_pago = $_FILES['comprobante_pago'];
+        	$formato_comprobante_pago = $comprobante_pago['type'];
+        	$limite_filesize = 20 * 1048576;
 
-        if($formato == $mimes_permitidos) {
-          if ($formato_comprobante_pago == $mimes_permitidos) {
-            if ($tamano < $limite_filesize) {
-              foreach ($_POST as $nombre => $valor) $this->model->$nombre = $valor;
-              $this->model->guardar_archivo();		
+        	if($formato == $mimes_permitidos) {
+          		if ($formato_comprobante_pago == $mimes_permitidos) {
+            		if ($tamano < $limite_filesize) {
+              			foreach ($_POST as $nombre => $valor) $this->model->$nombre = $valor;
+              			$this->model->guardar_archivo();		
               
-              $archivo_id = $this->model->archivo_id;
-              $detalle = "ID: " . $this->model->archivo_id . "<br>";
-              $archivo_id = $this->model->archivo_id;
-              $detalle = $detalle . $tmp_detalle;
-              $detalle_email = $tmp_detalle;
-              $this->model->estado_id = 1; # pendiente de ingreso
-              $this->model->guardar_seguimiento();
+			            $archivo_id = $this->model->archivo_id;
+			            $detalle = "ID: " . $this->model->archivo_id . "<br>";
+			            $archivo_id = $this->model->archivo_id;
+			            $detalle = $detalle . $tmp_detalle;
+			            $detalle_email = $tmp_detalle;
+			            $this->model->estado_id = 1; # pendiente de ingreso
+			            $this->model->guardar_seguimiento();
 
-              FileHandler::save_file($archivo, $this->model->archivo_id, $this->model->seguimiento_id);
-              FileHandler::save_file($comprobante_pago, $this->model->archivo_id, 'comprobante_pago');
-              $auditor_id = Array2Auditor()->saveAuditor($txt_tipo, "Documentos", $detalle);
-              $comprobante = "{$archivo_id}-{$documento}-{$auditor_id}";
-              $_SESSION["sesion.comprobante_ingreso"] = $comprobante;
-              # ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
-              //$this->envia_email_estado_documento('Pendiente de Ingreso', $detalle_email, $archivo_id);  
-              header("Location: /sgd/archivos/{$redirect}/4");
-            } else {
-              header("Location: /sgd/archivos/{$redirect}/3");	
-            }
-          } else {
-            header("Location: /sgd/archivos/{$redirect}/2");	
-          }
-        } else {
-          header("Location: /sgd/archivos/{$redirect}/2");	
-        }
-      } else {
-        header("Location: /sgd/archivos/{$redirect}/9");	
-      }    
-  }
+			            FileHandler::save_file($archivo, $this->model->archivo_id, $this->model->seguimiento_id);
+			            FileHandler::save_file($comprobante_pago, $this->model->archivo_id, 'comprobante_pago');
+			            $auditor_id = Array2Auditor()->saveAuditor($txt_tipo, "Documentos", $detalle);
+			            $comprobante = "{$archivo_id}-{$documento}-{$auditor_id}";
+			            $_SESSION["sesion.comprobante_ingreso"] = $comprobante;
+			            # ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
+			            //$this->envia_email_estado_documento('Pendiente de Ingreso', $detalle_email, $archivo_id);  
+			            header("Location: /sgd/archivos/{$redirect}/4");
+		            } else {
+		              	header("Location: /sgd/archivos/{$redirect}/3");	
+		            }
+          		} else {
+            		header("Location: /sgd/archivos/{$redirect}/2");	
+          		}
+        	} else {
+          		header("Location: /sgd/archivos/{$redirect}/2");	
+        	}
+      	} else {
+        	header("Location: /sgd/archivos/{$redirect}/9");	
+      	}    
+  	}
 	
 	function actualizar() {
 		SessionHandling::check();
-    $detalle = "Razón Social: " . $_POST['denominacion'] . "<br> CUIT: " . $_POST['documento'] . "<br> Ejercicio: " . $_POST['ejercicio'];
+    	$detalle = "Razón Social: " . $_POST['denominacion'] . "<br> CUIT: " . $_POST['documento'] . "<br> Ejercicio: " . $_POST['ejercicio'];
 		foreach ($_POST as $nombre => $valor) $this->model->$nombre = $valor;
 		$this->model->guardar_archivo();		
 		Array2Auditor()->saveAuditor('Editar Documento', 'Documentos', $detalle);
@@ -226,17 +225,17 @@ class ArchivosController {
 	
 	function ver($argumentos) {
 		SessionHandling::check();
-    SessionHandling::actualizar();
+    	SessionHandling::actualizar();
 		$this->model->archivo_id = $argumentos[0];
 		$this->model->estado_id = $argumentos[1];
 		
 		switch ($this->model->estado_id) {
 			case 1:
-        SessionHandling::checkGrupo(4);
+        		SessionHandling::checkGrupo(4);
 				$html = "evaluar";
 				break;
 			case 2:
-        SessionHandling::checkGrupo(3);
+        		SessionHandling::checkGrupo(3);
 				$html = "autorizar";
 				break;
 			case 3:
@@ -248,7 +247,7 @@ class ArchivosController {
 			case 7:
 				$html = "reingresar";
 				break;
-      case 8:
+      		case 8:
 				$html = "ver";
 				break;
 			case 9:
@@ -261,10 +260,11 @@ class ArchivosController {
 		
 		$archivo = $this->model->get();
 		$seguimiento = $this->model->ver_detalle();
+		print_r($seguimiento);exit;
 		$this->view->mostrar_detalle($archivo, $seguimiento, $html);
 	}
   
-  function ver_detalle_autorizar($argumentos) {
+  	function ver_detalle_autorizar($argumentos) {
 		SessionHandling::check();
     SessionHandling::actualizar();
     SessionHandling::checkGrupo(3);
