@@ -421,7 +421,7 @@ class ArchivosView extends View{
 		
 		$datos = (!is_array($datos)) ? array() : $datos;
 		$dict = array("{titulo}"=>"Listado de documentos", "{estado}"=>$estado);
-		$tbl_documentos_pendientes = $this->render_regex('repetir', $tbl_pendientes, $datos);
+		$tbl_pendientes = $this->render_regex('repetir', $tbl_pendientes, $datos);
 		$render = str_replace("{tbl_pendientes}", $tbl_pendientes, $gui);
 		$render = $this->render($dict, $render);
 		$template = $this->render_template($menu, $render);

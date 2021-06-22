@@ -522,7 +522,7 @@ class ArchivosController {
 	
 	function pendientes_usuario() {
 		SessionHandling::check();
-    SessionHandling::actualizar();
+    	SessionHandling::actualizar();
 		$this->model->estado_id = 1;
 		$datos = $this->model->listar_estado_usuario();
 		$estado = "Pendientes de ingreso";
