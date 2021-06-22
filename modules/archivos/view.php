@@ -625,6 +625,7 @@ class ArchivosView extends View{
 
 		$tbl_reportes = $this->render_regex('repetir', $tbl_reportes, $datos);
 		$render = str_replace('{tbl_reportes}', $tbl_reportes, $gui);
+		$render = str_replace('{slt_estado}', $slt_estado, $render);
 		$render = $this->render($dict, $render);
 		$render = $this->render($contador_estados, $render);
 		$render = str_replace('{estado_id}', $estado_id, $render);
@@ -633,11 +634,11 @@ class ArchivosView extends View{
 		print $template;
 	}
   
-  function mostrar_form_buscar($datos=array()) {
+  	function mostrar_form_buscar($datos=array()) {
 		$gui = file_get_contents("static/modules/archivos/buscar.html");
 		$menu = file_get_contents("static/menu.html");
 		$grupo_id = $_SESSION["sesion.grupo_id"];
-    $administrador_display = ($grupo_id == 1) ? "block;" : "none;";
+    	$administrador_display = ($grupo_id == 1) ? "block;" : "none;";
     
 		$restricciones = $this->genera_menu();
 		$menu = $this->render($restricciones, $menu);
