@@ -12,22 +12,22 @@ class AuditorController {
 	}
   
 	function listar() {
-    SessionHandling::check();
-    SessionHandling::checkGrupo('1,4,99');
+    	SessionHandling::check();
+    	SessionHandling::checkGrupo('1,4,99');
 		$auditorias = $this->model->listar();
 		$this->view->listar($auditorias);
 	}
   
-  function buscar() {
+  	function buscar() {
 		SessionHandling::check();
-    SessionHandling::actualizar();
+    	SessionHandling::actualizar();
 		$busqueda = filter_input(INPUT_POST, 'busqueda');
-    $subtitulo = "Reporte de Auditor - Búsqueda: {$busqueda}";
+    	$subtitulo = "Reporte de Auditor - Búsqueda: {$busqueda}";
 		$busqueda = "%{$busqueda}%";
 		$datos = $this->model->descargar_informe($busqueda);
-    if(!is_array($datos)) $datos = array();
+    	if(!is_array($datos)) $datos = array();
 		
-    $array_encabezados = array('ID', 'USUARIO', 'FECHA', 'HORA', 'MÓDULO', 'ACCIÓN', 'SO', 'NAVEGADOR', 'IP', 'DETALLE');
+    	$array_encabezados = array('ID', 'USUARIO', 'FECHA', 'HORA', 'MÓDULO', 'ACCIÓN', 'SO', 'NAVEGADOR', 'IP', 'DETALLE');
 		$array_exportacion = array();
 		$array_exportacion[] = $array_encabezados;
 		foreach ($datos as $clave=>$valor) {
@@ -46,7 +46,7 @@ class AuditorController {
 			$array_exportacion[] = $array_temp;
 		}
     
-    ExcelReport()->extraer_informe($array_exportacion, $subtitulo);
+    	ExcelReport()->extraer_informe($array_exportacion, $subtitulo);
 	}
 }
 ?>
