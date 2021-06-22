@@ -14,6 +14,10 @@ class UsuariosController {
 		$this->view = new UsuariosView();
 	}
 
+    function login() {
+      $this->view->mostrar_error("Nombre de usuario o clave incorrectos.");
+    }
+
 	function gestionar() {
     SessionHandling::check();
 		$usuarios = $this->model->listar();
@@ -100,32 +104,33 @@ class UsuariosController {
     }
   }
   
-	function verificar() {
-		$this->model->denominacion = filter_input(INPUT_POST, "denominacion");
-		$this->model->clave = filter_input(INPUT_POST, "clave");
-    
-    $evaluacion = $this->model->evaluar();
-    if($evaluacion == 0) $this->view->mostrar_error("Nombre de usuario o clave incorrectos.");
-    if($evaluacion == 1) {
-      $datos = array("{usuario_id}"=>$this->model->usuario_id, "{denominacion}"=>$this->model->denominacion);
-      $this->view->mostrar_form_nuevo($datos);
-    }
-    if($evaluacion == 2) {
-      $datos = $this->model->get();
-      SessionHandling::create($datos);
-      if($_SESSION["sesion.navegador_flag"] == 1) {
-        $this->view->mostrar_error("Disculpe, pero nuestro sistema no es compatible con su navegador, recomendamos usar Google Chrome.");
-        SessionHandling::destroy_sin_redirect();
-      } else {
-        $grupo_id = $_SESSION['sesion.grupo_id'];
-        if ($grupo_id == 99 || $grupo_id == 1) {
-          header("Location: /" . APP_NAME . "/usuarios/panel");
+  function verificar() {
+     //print_r('Hola');exit;
+     $this->model->denominacion = filter_input(INPUT_POST, "denominacion");
+     $this->model->clave = filter_input(INPUT_POST, "clave");
+      
+     $evaluacion = $this->model->evaluar();
+     if($evaluacion == 0) $this->view->mostrar_error("Nombre de usuario o clave incorrectos.");
+     if($evaluacion == 1) {
+        $datos = array("{usuario_id}"=>$this->model->usuario_id, "{denominacion}"=>$this->model->denominacion);
+        $this->view->mostrar_form_nuevo($datos);
+     }
+     if($evaluacion == 2) {
+        $datos = $this->model->get();
+        SessionHandling::create($datos);
+        if($_SESSION["sesion.navegador_flag"] == 1) {
+           $this->view->mostrar_error("Disculpe, pero nuestro sistema no es compatible con su navegador, recomendamos usar Google Chrome.");
+           SessionHandling::destroy_sin_redirect();
         } else {
-          header("Location: /" . APP_NAME . "/usuarios/panel");
+           $grupo_id = $_SESSION['sesion.grupo_id'];
+           if ($grupo_id == 99 || $grupo_id == 1) {
+              header("Location: /" . APP_NAME . "/usuarios/panel");
+           } else {
+              header("Location: /" . APP_NAME . "/usuarios/panel");
+           }
         }
-      }
-    }
-	}  
+     }
+  }
   
   function actualizar_informacion() {
 		SessionHandling::check();
