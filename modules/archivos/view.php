@@ -609,25 +609,26 @@ class ArchivosView extends View{
 
 	function reportes($estados=array(), $datos=array(), $estado_id=0, $contador_estados=array()) {
 		$gui = file_get_contents("static/modules/archivos/reportes.html");
+		$tbl_reportes = file_get_contents("static/modules/archivos/tbl_reportes.html");
 		$slt_estado = file_get_contents("static/common/slt_estados.html");
 		$menu = file_get_contents("static/menu.html");
 		
-    $slt_estado = $this->render_regex('repetir', $slt_estado, $estados);
+    	$slt_estado = $this->render_regex('repetir', $slt_estado, $estados);
 		$grupo_id = $_SESSION["sesion.grupo_id"];
-    $administrador_display = ($grupo_id == 1) ? "block;" : "none;";
-    $btn_display = (!empty($datos)) ? "block;" : "none;";
+    	$administrador_display = ($grupo_id == 1) ? "block;" : "none;";
+    	$btn_display = (!empty($datos)) ? "block;" : "none;";
     
 		$restricciones = $this->genera_menu();
 		$menu = $this->render($restricciones, $menu);
 		
 		$dict = array("{titulo}"=>"Reportes", "{administrador}"=>$administrador_display, "{btn_display}"=>$btn_display);
 
-		$render = $this->render_regex('repetir', $gui, $datos);
+		$tbl_reportes = $this->render_regex('repetir', $tbl_reportes, $datos);
+		$render = str_replace('{tbl_reportes}', $tbl_reportes, $gui);
 		$render = $this->render($dict, $render);
 		$render = $this->render($contador_estados, $render);
-		$render = str_replace('{slt_estado}', $slt_estado, $render);
 		$render = str_replace('{estado_id}', $estado_id, $render);
-    $render = str_replace('{theme_path}', THEME_PATH, $render);
+    	$render = str_replace('{theme_path}', THEME_PATH, $render);
 		$template = $this->render_template($menu, $render);
 		print $template;
 	}

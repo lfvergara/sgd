@@ -1088,69 +1088,67 @@ class ArchivosController {
 		}
 	}
   
-  function reportes() {
+  	function reportes() {
 		SessionHandling::check();
-    SessionHandling::checkGrupo(4);
-    $busqueda = 0; 
-    if($_POST) {
+    	SessionHandling::checkGrupo(4);
+    	$busqueda = 0; 
+    	if($_POST) {
 			$tipo_reporte = filter_input(INPUT_POST, 'tipo_reporte');
 			$desde = filter_input(INPUT_POST, 'desde');
 			$hasta = filter_input(INPUT_POST, 'hasta');
 			$estado_id = filter_input(INPUT_POST, 'estado_id');
-      switch($tipo_reporte) {
-        case 1:
-          $this->model->estado_id = $estado_id;
-          $datos = $this->model->listar_estado_reporte();
-          break;
-        case 2:
-          $this->model->estado_id = $estado_id;
-          $this->model->desde = $desde;
-          $this->model->hasta = $hasta;
-          $datos = $this->model->listar_estado_reporte_fecha();
-          break;
-      }
-      
+	      	switch($tipo_reporte) {
+	        	case 1:
+	          		$this->model->estado_id = $estado_id;
+	          		$datos = $this->model->listar_estado_reporte();
+	          		break;
+	        	case 2:
+	          		$this->model->estado_id = $estado_id;
+	          		$this->model->desde = $desde;
+	          		$this->model->hasta = $hasta;
+	          		$datos = $this->model->listar_estado_reporte_fecha();
+	          	break;
+	      	}
 		}
     
-    $contador_estados = $this->model->contador_estados();
-    $estados = $this->model->listar_estados_seguimiento();
+	    $contador_estados = $this->model->contador_estados();
+	    $estados = $this->model->listar_estados_seguimiento();
 		$this->view->reportes($estados, $datos, $estado_id, $contador_estados);
 	}
   
-  function reportes_grafico() {
+  	function reportes_grafico() {
 		SessionHandling::check();
-    SessionHandling::checkGrupo(4);
-    $busqueda = 0; 
-    if($_POST) {
+	    SessionHandling::checkGrupo(4);
+	    $busqueda = 0; 
+    	if($_POST) {
 			$tipo_reporte = filter_input(INPUT_POST, 'tipo_reporte');
 			$desde = filter_input(INPUT_POST, 'desde');
 			$hasta = filter_input(INPUT_POST, 'hasta');
 			$estado_id = filter_input(INPUT_POST, 'estado_id');
-      switch($tipo_reporte) {
-        case 1:
-          $this->model->estado_id = $estado_id;
-          $datos = $this->model->listar_estado_reporte();
-          break;
-        case 2:
-          $this->model->estado_id = $estado_id;
-          $this->model->desde = $desde;
-          $this->model->hasta = $hasta;
-          $datos = $this->model->listar_estado_reporte_fecha();
-          break;
-      }
-      
+      		switch($tipo_reporte) {
+		        case 1:
+		          	$this->model->estado_id = $estado_id;
+		          	$datos = $this->model->listar_estado_reporte();
+		          	break;
+		        case 2:
+		          	$this->model->estado_id = $estado_id;
+		          	$this->model->desde = $desde;
+		          	$this->model->hasta = $hasta;
+		          	$datos = $this->model->listar_estado_reporte_fecha();
+		          	break;
+      		}      
 		}
     
-    $graph_desde = filter_input(INPUT_POST, 'graph_desde');
-    $graph_hasta = filter_input(INPUT_POST, 'graph_hasta');
-    $this->model->desde = $graph_desde;
-    $this->model->hasta = $graph_hasta;
-    $contador_estados = $this->model->contador_estados_fecha();
-    $estados = $this->model->listar_estados_seguimiento();
+    	$graph_desde = filter_input(INPUT_POST, 'graph_desde');
+	    $graph_hasta = filter_input(INPUT_POST, 'graph_hasta');
+	    $this->model->desde = $graph_desde;
+	    $this->model->hasta = $graph_hasta;
+	    $contador_estados = $this->model->contador_estados_fecha();
+	    $estados = $this->model->listar_estados_seguimiento();
 		$this->view->reportes($estados, $datos, $estado_id, $contador_estados);
 	}
   
-  function reporte_seguimientos_fecha() {
+  	function reporte_seguimientos_fecha() {
 		SessionHandling::check();
     SessionHandling::checkGrupo(4);
     
