@@ -14,14 +14,16 @@ class FileHandler {
 
   static function get_file($archivo) {
     $archivo = FILES_PATH.$archivo;
+    print_r($archivo);
     if(file_exists($archivo)) {
-      print_r('Hola');exit;
+      print_r('Hola');
       $finfo = finfo_open(FILEINFO_MIME_TYPE);
       $mime = finfo_file($finfo, $archivo);
       finfo_close($finfo);
       header("Content-Type: $mime");
       readfile($archivo);
     } else {
+      print_r('No Hola');
       $archivo = "http://www.cpcelr.org.ar/img/logo-base.jpg";
       $finfo = finfo_open(FILEINFO_MIME_TYPE);
       $mime = finfo_file($finfo, $archivo);
@@ -29,6 +31,7 @@ class FileHandler {
       header("Content-Type: $mime");
       readfile($archivo);
     }
+      exit;
   }
 
   static function check_file($carpeta, $archivo) {
