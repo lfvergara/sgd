@@ -98,7 +98,7 @@ class UsuariosController {
 	        	$this->model->actualizar_token();
 	        
 	        	$emailHelper = new EmailHelper();
-	        	//$emailHelper->envia_email($usuario);HOLA
+	        	$emailHelper->envia_email($usuario);
 	       	 	$this->view->mostrar_error("Hemos enviado a su correo la nueva contraseña. Muchas gracias!");        
 	      	}
     	}
@@ -193,7 +193,7 @@ class UsuariosController {
 		$this->model->actualizar_matriculado();    
     
     	$emailHelper = new EmailHelper();
-    	//$emailHelper->envia_email_actualizacion_matriculado($matriculado);HOLA
+    	$emailHelper->envia_email_actualizacion_matriculado($matriculado);
     
     	header("Location: /" . APP_NAME . "/usuarios/mis_datos/1");
   	}
@@ -224,7 +224,7 @@ class UsuariosController {
     	$_SESSION["sesion.actualizacion"] = 2;
     
 	    $emailHelper = new EmailHelper();
-	    //$emailHelper->envia_email_actualizacion_matriculado($matriculado);HOLA
+	    $emailHelper->envia_email_actualizacion_matriculado($matriculado);
     
     	header("Location: /" . APP_NAME . "/usuarios/panel");
   	}

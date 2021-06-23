@@ -997,14 +997,14 @@ class ArchivosController {
 			$this->model->comentario = "Aceptado por {$_SESSION['sesion.denominacion']}";
 	      	Array2Auditor()->saveAuditor('Documento Aceptado', 'Documentos', $detalle);
 		  	$this->model->guardar_seguimiento();
-	      	//$this->envia_email_estado_documento('Documento Aceptado', $detalle_email, $archivo_id);HOLA
+	      	$this->envia_email_estado_documento('Documento Aceptado', $detalle_email, $archivo_id);
 	      	header("Location: /sgd/archivos/autorizar/5");
 		} elseif($this->model->estado_id == 6) {
       		#FIXME SI IN HERE IF IS NECESSARY A BAR CODE
 			$this->model->comentario = filter_input(INPUT_POST, 'comentario');
 		  	$this->model->guardar_seguimiento();
       		Array2Auditor()->saveAuditor('Documento Aceptado', 'Documentos', $detalle);
-      		//$this->envia_email_estado_documento('Documento Aceptado', $detalle_email, $archivo_id);HOLA
+      		$this->envia_email_estado_documento('Documento Aceptado', $detalle_email, $archivo_id);
       		header("Location: /sgd/archivos/autorizar/5");
 		} else {
       		$this->model->comentario = filter_input(INPUT_POST, 'comentario');
@@ -1021,7 +1021,7 @@ class ArchivosController {
         		} 
 		  	} 
 			  
-      		//$this->envia_email_estado_documento('Documento Observado', $detalle_email, $archivo_id);HOLA
+      		$this->envia_email_estado_documento('Documento Observado', $detalle_email, $archivo_id);
       		header("Location: /sgd/archivos/autorizar/4");
 		}
   	}
@@ -1059,7 +1059,7 @@ class ArchivosController {
 			} elseif ($estado_id == 7) {
         		Array2Auditor()->saveAuditor('Documento Rechazado', 'Documentos', $detalle);
 			  	$comentario = filter_input(INPUT_POST, 'comentario');
-        		//$this->envia_email_estado_documento('Documento Rechazado', $detalle_email, $archivo_id);HOLA
+        		$this->envia_email_estado_documento('Documento Rechazado', $detalle_email, $archivo_id);
       		} else {
         		Array2Auditor()->saveAuditor('Documento Legalizado', 'Documentos', $detalle);
 				$comentario = "Legalizado por {$_SESSION['sesion.denominacion']}";
@@ -1375,7 +1375,7 @@ class ArchivosController {
       	if (!empty($datos_matriculado)) {
         	if ($datos_matriculado[0]['correoelectronico'] != ' ') {
           		$emailHelper = new EmailHelper();
-          		//$emailHelper->envia_email_estado_documento($datos_matriculado, $documento_detalle, $estado);HOLA
+          		$emailHelper->envia_email_estado_documento($datos_matriculado, $documento_detalle, $estado);
         	}
       	}
   	}

@@ -13,7 +13,7 @@ class EmailHelper extends View {
                 $asunto = "Recuperar Contraseña: CPCE";
                 $array_final[] = array('email'=>$destinatario,'type'=>'to');
           
-                $mandrill = new Mandrill('1uF0tBUQFNpL9aKBzw24XA');
+                $mandrill = new Mandrill('zxCTtQ5WNKT5OzMM2xUuWw');
                 $message = array(
                 'html' => $gui,
                 'subject' => $asunto,
@@ -60,7 +60,7 @@ class EmailHelper extends View {
                 $asunto = "Actualización de Datos de Matriculado";
                 $array_final[] = array('email'=>$destinatario,'type'=>'to');
           
-                $mandrill = new Mandrill('1uF0tBUQFNpL9aKBzw24XA');
+                $mandrill = new Mandrill('zxCTtQ5WNKT5OzMM2xUuWw');
                 $message = array(
                 'html' => $gui,
                 'subject' => $asunto,
@@ -111,7 +111,7 @@ class EmailHelper extends View {
                 $asunto = "Actualización de Estado en Documento";
                 $array_final[] = array('email'=>$destinatario,'type'=>'to');
           
-                $mandrill = new Mandrill('1uF0tBUQFNpL9aKBzw24XA');
+                $mandrill = new Mandrill('zxCTtQ5WNKT5OzMM2xUuWw');
                 $message = array(
                 'html' => $gui,
                 'subject' => $asunto,
@@ -157,7 +157,7 @@ class EmailHelper extends View {
             $array_final[] = array('email'=>$destinatario,'type'=>'to');
             //$array_final[] = array('email'=>'devteam.edelar@gmail.com','type'=>'to');
 
-            $mandrill = new Mandrill('1uF0tBUQFNpL9aKBzw24XA');
+            $mandrill = new Mandrill('zxCTtQ5WNKT5OzMM2xUuWw');
             $message = array(
             'html' => $gui,
             'subject' => $asunto,
