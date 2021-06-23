@@ -168,7 +168,7 @@ class ArchivosController {
     
 		$mimes_permitidos = "application/pdf";
     	//$bandera_cuit = $this->verificar_cuit_guardar($_POST["documento"]);
-    	print_r($_FILES);exit;
+    	
       	if($_FILES['archivo']['error']==0 AND $_FILES['comprobante_pago']['error']==0) {
         	$archivo = $_FILES['archivo'];
         	$formato = $archivo['type'];
