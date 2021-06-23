@@ -98,7 +98,7 @@ class UsuariosController {
 	        	$this->model->actualizar_token();
 	        
 	        	$emailHelper = new EmailHelper();
-	        	$emailHelper->envia_email($usuario);
+	        	//$emailHelper->envia_email($usuario);HOLA
 	       	 	$this->view->mostrar_error("Hemos enviado a su correo la nueva contraseña. Muchas gracias!");        
 	      	}
     	}
