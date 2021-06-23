@@ -15,8 +15,8 @@ class FileHandler {
   static function get_file($archivo) {
     $archivo = FILES_PATH.$archivo;
     if(file_exists($archivo)) {
-      $finfo = finfo_open(FILEINFO_MIME_TYPE);
       print_r('Hola');exit;
+      $finfo = finfo_open(FILEINFO_MIME_TYPE);
       $mime = finfo_file($finfo, $archivo);
       finfo_close($finfo);
       header("Content-Type: $mime");
