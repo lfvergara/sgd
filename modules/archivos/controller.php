@@ -56,7 +56,7 @@ class ArchivosController {
 	}
   
   
-  function ingresar_con_ajuste($argumentos) {
+  	function ingresar_con_ajuste($argumentos) {
 		SessionHandling::check();
     	SessionHandling::actualizar();
 		switch($argumentos[0]) {
@@ -277,7 +277,7 @@ class ArchivosController {
 	
 	function editar($argumentos) {
 		SessionHandling::check();
-    SessionHandling::actualizar();
+    	SessionHandling::actualizar();
 		$archivo_id = $argumentos[0];
 		$this->model->archivo_id = $archivo_id;
 		$archivo = $this->model->get();
@@ -293,11 +293,11 @@ class ArchivosController {
 		$archivo_id = filter_input(INPUT_POST,"archivo_id");
 		$motivo = filter_input(INPUT_POST,"motivo");
 		$this->model->archivo_id = $archivo_id;
-    $array_archivo = $this->model->get();
-    $detalle = "ID: " . $array_archivo["archivo_id"] . "<br>Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"] . "<br>Motivo: " . $motivo;
+    	$array_archivo = $this->model->get();
+    	$detalle = "ID: " . $array_archivo["archivo_id"] . "<br>Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"] . "<br>Motivo: " . $motivo;
 		$this->model->eliminar_pendiente();
 		FileHandler::delete_files($archivo_id);
-    Array2Auditor()->saveAuditor('Eliminar Documento Pendiente de Ingreso', 'Documentos', $detalle);
+    	Array2Auditor()->saveAuditor('Eliminar Documento Pendiente de Ingreso', 'Documentos', $detalle);
 		header("Location: /sgd/archivos/buscar");
 	}
 	
@@ -306,14 +306,14 @@ class ArchivosController {
 		
 		$archivo_id = filter_input(INPUT_POST, "archivo_id");
 		$this->model->archivo_id = $archivo_id;
-    $array_archivo = $this->model->get();
-    $documento = $array_archivo["documento"];
-    $detalle = "ID: " . $array_archivo["archivo_id"] . "<br>Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $documento . "<br>Ejercicio: " . $array_archivo["ejercicio"];
-    $detalle_email = "Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $documento . "<br>Ejercicio: " . $array_archivo["ejercicio"];
-    $this->model = new Archivos();
+    	$array_archivo = $this->model->get();
+    	$documento = $array_archivo["documento"];
+    	$detalle = "ID: " . $array_archivo["archivo_id"] . "<br>Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $documento . "<br>Ejercicio: " . $array_archivo["ejercicio"];
+   		$detalle_email = "Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $documento . "<br>Ejercicio: " . $array_archivo["ejercicio"];
+    	$this->model = new Archivos();
 		$this->model->archivo_id = $archivo_id;
 		$mimes_permitidos = array("application/pdf");
-    $limite_filesize = 20 * 1048576;
+    	$limite_filesize = 20 * 1048576;
 		if($_FILES['archivo']['error']==0) {
 			$archivo = $_FILES['archivo'];
 			$formato = $archivo['type'];
@@ -326,9 +326,9 @@ class ArchivosController {
 					$this->model->guardar_seguimiento();
           
 					FileHandler::save_file($archivo, $this->model->archivo_id, $this->model->seguimiento_id);
-          $auditor_id = Array2Auditor()->saveAuditor('Reingresa Documento', 'Documentos', $detalle);
-          $comprobante = "{$archivo_id}-{$documento}-{$auditor_id}";
-          $_SESSION["sesion.comprobante_ingreso"] = $comprobante;
+          			$auditor_id = Array2Auditor()->saveAuditor('Reingresa Documento', 'Documentos', $detalle);
+          			$comprobante = "{$archivo_id}-{$documento}-{$auditor_id}";
+          			$_SESSION["sesion.comprobante_ingreso"] = $comprobante;
 					if($_FILES['comprobante_pago']['error']==0) {
 						$comprobante_pago = $_FILES['comprobante_pago'];
 						$formato_comprobante_pago = $comprobante_pago['type'];
@@ -337,8 +337,8 @@ class ArchivosController {
 						}
 					}
           
-          # ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
-          //$this->envia_email_estado_documento('Documento Reingresado', $detalle_email, $archivo_id);
+          			# ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
+          			//$this->envia_email_estado_documento('Documento Reingresado', $detalle_email, $archivo_id);
 					header("Location: /sgd/archivos/reingresar_documento/4");
 				} else {
 					header("Location: /sgd/archivos/reingresar_documento/3");	
@@ -450,33 +450,33 @@ class ArchivosController {
   
  	function corregir($argumentos) {
 		SessionHandling::check();
-    SessionHandling::actualizar();
-    switch($argumentos[0]) {
+	    SessionHandling::actualizar();
+	    switch($argumentos[0]) {
 			case 1:
 				$array_msj = array("{mensaje}"=>"",
-													 "{display}"=>"none",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"none",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 			case 2:
 				$array_msj = array("{mensaje}"=>"Sólo se admiten archivos PDF.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 			case 3:
 				$array_msj = array("{mensaje}"=>"El archivo es demasiado grande. El límite de subida es 20MB.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 			case 4:
 				$array_msj = array("{mensaje}"=>"El documento se ha reingresado correctamente. Muchas gracias.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"block");
-        break;
-      case 9:
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"block");
+       			break;
+      		case 9:
 				$array_msj = array("{mensaje}"=>"Ha ocurrido un error, pruebe nuevamente por favor. Disculpe las molestias, muchas gracias.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
-        break;
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
+        		break;
 		}
 		$this->model->estado_id = 4;
 		$datos = $this->model->listar_estado_usuario();
@@ -486,33 +486,33 @@ class ArchivosController {
 	
 	function reingresar($argumentos) {
 		SessionHandling::check();
-    SessionHandling::actualizar();
-    switch($argumentos[0]) {
+    	SessionHandling::actualizar();
+    	switch($argumentos[0]) {
 			case 1:
 				$array_msj = array("{mensaje}"=>"",
-													 "{display}"=>"none",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"none",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 			case 2:
 				$array_msj = array("{mensaje}"=>"Sólo se admiten archivos PDF.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 			case 3:
 				$array_msj = array("{mensaje}"=>"El archivo es demasiado grande. El límite de subida es 20MB.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
 				break;
 			case 4:
 				$array_msj = array("{mensaje}"=>"El documento se ha reingresado correctamente. Muchas gracias.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"block");
-        break;
-      case 9:
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"block");
+        		break;
+      		case 9:
 				$array_msj = array("{mensaje}"=>"Ha ocurrido un error, pruebe nuevamente por favor. Disculpe las molestias, muchas gracias.",
-													 "{display}"=>"show",
-                           "{btn_comprobante_display}"=>"none");
-        break;
+								   "{display}"=>"show",
+								   "{btn_comprobante_display}"=>"none");
+        		break;
 		}
 		$this->model->estado_id = 7;
 		$datos = $this->model->listar_estado_usuario();
@@ -532,13 +532,13 @@ class ArchivosController {
 	function evaluar() {
 		SessionHandling::check();
 		SessionHandling::checkGrupo(4);
-    $datos = $this->model->listar_evaluacion();
+    	$datos = $this->model->listar_evaluacion();
     
-    foreach ($datos as $clave=>$valor) {
-      $archivo_id = $valor['archivo_id'];
-      $rechazo = $this->model->verificar_rechazo($archivo_id);
-      $datos[$clave]['class_icon'] = $rechazo;
-    }
+    	foreach ($datos as $clave=>$valor) {
+      		$archivo_id = $valor['archivo_id'];
+      		$rechazo = $this->model->verificar_rechazo($archivo_id);
+      		$datos[$clave]['class_icon'] = $rechazo;
+    	}
     
 		$estado = "Pendiente de ingreso";
 		$this->view->mostrar_listado_evaluar($datos, $estado);
@@ -546,7 +546,7 @@ class ArchivosController {
 	
 	function aprobados() {
 		SessionHandling::check();
-    SessionHandling::actualizar();
+    	SessionHandling::actualizar();
 		$this->model->estado_id = 6;
 		$datos = $this->model->listar_estado_usuario();
 		$this->view->aprobados($datos);
@@ -554,14 +554,14 @@ class ArchivosController {
 	
 	function legalizar() {
 		SessionHandling::check();
-    SessionHandling::checkGrupo('3,5');
+    	SessionHandling::checkGrupo('3,5');
 		$this->model->estado_id = 9;
 		$estado = "Legalizar";
 		$datos = $this->model->listar_estado();
 		$this->view->mostrar_listado_legalizar($datos, $estado);
 	}
   
-  function legalizar_usuario() {
+  	function legalizar_usuario() {
 		SessionHandling::check();
 		$this->model->estado_id = 9;
 		$estado = "Legalizar";
@@ -595,88 +595,88 @@ class ArchivosController {
 	
 	function validar_documento($argumentos) {
 		SessionHandling::check();
-    SessionHandling::checkGrupo(4);
+    	SessionHandling::checkGrupo(4);
 		
-    $archivo_id = $argumentos[0];
+    	$archivo_id = $argumentos[0];
 		$this->model->archivo_id = $archivo_id;
-    $archivo = $this->model->get();
-    $tipo_id = $archivo['tipo_id'];
+	    $archivo = $this->model->get();
+	    $tipo_id = $archivo['tipo_id'];
 		$tipo_trabajo = $this->model->verificar_tipo_archivo($tipo_id);
     
-    $this->model->tipo = $tipo_trabajo;
+    	$this->model->tipo = $tipo_trabajo;
 		$tipos_trabajo = $this->model->listar_tipos_trabajo();
     
-    if($tipo_trabajo == 1) {
-      $tipo_id = $archivo["tipo_id"];
-		  $documento = $archivo["documento"];
-      $fecha_inicio = str_replace("-", "", $archivo["fecha_editar_inicio"]);
-      $fecha_cierre = str_replace("-", "", $archivo["fecha_editar_cierre"]);
-      $fecha_informe = str_replace("-", "", $archivo["fecha_editar_informe"]);
-      $ejercicio = $archivo["ejercicio"];
-      $activo_corriente = $archivo["activo_corriente"];
-      $activo_corriente = $activo_corriente * 100;
-      $activo_nocorriente = $archivo["activo_nocorriente"];
-      $activo_nocorriente = $activo_nocorriente * 100;
-      $pasivo_corriente = $archivo["pasivo_corriente"];
-      $pasivo_corriente = $pasivo_corriente * 100;
-      $pasivo_nocorriente = $archivo["pasivo_nocorriente"];
-      $pasivo_nocorriente = $pasivo_nocorriente * 100;
-      $patrimonio_neto = $archivo["patrimonio_neto"];
-      $patrimonio_neto = $patrimonio_neto * 100;
-      $bienes_uso = $archivo["bienes_uso"];
-      $bienes_uso = $bienes_uso * 100;
-      $venta_neta = $archivo["venta_neta"];
-      $venta_neta = $venta_neta * 100;
-      $resultado_final = $archivo["resultado_final"];
-      $resultado_final = $resultado_final * 100;
+    	if($tipo_trabajo == 1) {
+      		$tipo_id = $archivo["tipo_id"];
+		  	$documento = $archivo["documento"];
+	        $fecha_inicio = str_replace("-", "", $archivo["fecha_editar_inicio"]);
+	        $fecha_cierre = str_replace("-", "", $archivo["fecha_editar_cierre"]);
+	        $fecha_informe = str_replace("-", "", $archivo["fecha_editar_informe"]);
+	        $ejercicio = $archivo["ejercicio"];
+	        $activo_corriente = $archivo["activo_corriente"];
+	        $activo_corriente = $activo_corriente * 100;
+	        $activo_nocorriente = $archivo["activo_nocorriente"];
+	        $activo_nocorriente = $activo_nocorriente * 100;
+	        $pasivo_corriente = $archivo["pasivo_corriente"];
+	        $pasivo_corriente = $pasivo_corriente * 100;
+	        $pasivo_nocorriente = $archivo["pasivo_nocorriente"];
+	        $pasivo_nocorriente = $pasivo_nocorriente * 100;
+	        $patrimonio_neto = $archivo["patrimonio_neto"];
+	        $patrimonio_neto = $patrimonio_neto * 100;
+	        $bienes_uso = $archivo["bienes_uso"];
+	        $bienes_uso = $bienes_uso * 100;
+	        $venta_neta = $archivo["venta_neta"];
+	        $venta_neta = $venta_neta * 100;
+	        $resultado_final = $archivo["resultado_final"];
+	        $resultado_final = $resultado_final * 100;
       
-      $codigo_barras = $tipo_id . $documento . $fecha_inicio . $fecha_cierre . $fecha_informe . $ejercicio . $activo_corriente . $activo_nocorriente . $pasivo_corriente . $pasivo_nocorriente;
-      $codigo_barras .= $patrimonio_neto . $bienes_uso . $venta_neta . $resultado_final;
-		  $codigo_barras = hash(md5, $codigo_barras);
+      		$codigo_barras = $tipo_id . $documento . $fecha_inicio . $fecha_cierre . $fecha_informe . $ejercicio . $activo_corriente . $activo_nocorriente . $pasivo_corriente . $pasivo_nocorriente;
+      		$codigo_barras .= $patrimonio_neto . $bienes_uso . $venta_neta . $resultado_final;
+		  	$codigo_barras = hash(md5, $codigo_barras);
       
-      $this->model->actualizar_codigo_barras($codigo_barras, $archivo_id);
-      $array_verificar = array("{verificar-archivo_id}"=>$archivo_id,
-                               "{verificar-tipo_id}"=>$tipo_id,
-                               "{verificar-documento}"=>$documento,
-                               "{verificar-fecha_inicio}"=>$archivo["fecha_editar_inicio"],
-                               "{verificar-fecha_cierre}"=>$archivo["fecha_editar_cierre"],
-                               "{verificar-fecha_informe}"=>$archivo["fecha_editar_informe"],
-                               "{verificar-ejercicio}"=>$ejercicio,
-                               "{verificar-activo_corriente}"=>$archivo["activo_corriente"],
-                               "{verificar-activo_nocorriente}"=>$archivo["activo_nocorriente"],
-                               "{verificar-pasivo_corriente}"=>$archivo["pasivo_corriente"],
-                               "{verificar-pasivo_nocorriente}"=>$archivo["pasivo_nocorriente"],
-                               "{verificar-patrimonio_neto}"=>$archivo["patrimonio_neto"],
-                               "{verificar-bienes_uso}"=>$archivo["bienes_uso"],
-                               "{verificar-venta_neta}"=>$archivo["venta_neta"],
-                               "{verificar-resultado_final}"=>$archivo["resultado_final"],
-                               "{verificar-codigo_barras}"=>$codigo_barras);      
+      		$this->model->actualizar_codigo_barras($codigo_barras, $archivo_id);
+      		$array_verificar = array("{verificar-archivo_id}"=>$archivo_id,
+            	                     "{verificar-tipo_id}"=>$tipo_id,
+                  		             "{verificar-documento}"=>$documento,
+                        	         "{verificar-fecha_inicio}"=>$archivo["fecha_editar_inicio"],
+                              	 	 "{verificar-fecha_cierre}"=>$archivo["fecha_editar_cierre"],
+                               		 "{verificar-fecha_informe}"=>$archivo["fecha_editar_informe"],
+                               		 "{verificar-ejercicio}"=>$ejercicio,
+                               		 "{verificar-activo_corriente}"=>$archivo["activo_corriente"],
+                               		 "{verificar-activo_nocorriente}"=>$archivo["activo_nocorriente"],
+                               		 "{verificar-pasivo_corriente}"=>$archivo["pasivo_corriente"],
+                               		 "{verificar-pasivo_nocorriente}"=>$archivo["pasivo_nocorriente"],
+                               		 "{verificar-patrimonio_neto}"=>$archivo["patrimonio_neto"],
+                               		 "{verificar-bienes_uso}"=>$archivo["bienes_uso"],
+                               		 "{verificar-venta_neta}"=>$archivo["venta_neta"],
+                               		 "{verificar-resultado_final}"=>$archivo["resultado_final"],
+                               	 	 "{verificar-codigo_barras}"=>$codigo_barras);      
       
-      $this->view->mostrar_formulario_validar_tipo1($tipos_trabajo, $archivo, $array_verificar);
-    } else {
-      $tipo_id = $archivo["tipo_id"];
-		  $documento = $archivo["documento"];
-      $fecha_inicio = str_replace("-", "", $archivo["fecha_editar_inicio"]);
-      $fecha_cierre = str_replace("-", "", $archivo["fecha_editar_cierre"]);
-      $fecha_informe = str_replace("-", "", $archivo["fecha_editar_informe"]);
+      		$this->view->mostrar_formulario_validar_tipo1($tipos_trabajo, $archivo, $array_verificar);
+    	} else {
+      		$tipo_id = $archivo["tipo_id"];
+		  	$documento = $archivo["documento"];
+      		$fecha_inicio = str_replace("-", "", $archivo["fecha_editar_inicio"]);
+      		$fecha_cierre = str_replace("-", "", $archivo["fecha_editar_cierre"]);
+      		$fecha_informe = str_replace("-", "", $archivo["fecha_editar_informe"]);
       
-      $codigo_barras = $tipo_id . $documento . $fecha_inicio . $fecha_cierre . $fecha_informe;
-      $codigo_barras = hash(md5, $codigo_barras);
+      		$codigo_barras = $tipo_id . $documento . $fecha_inicio . $fecha_cierre . $fecha_informe;
+      		$codigo_barras = hash(md5, $codigo_barras);
       
-      $this->model->actualizar_codigo_barras($codigo_barras, $archivo_id);
-      $array_verificar = array("{verificar-archivo_id}"=>$archivo_id,
-                               "{verificar-tipo_id}"=>$tipo_id,
-                               "{verificar-documento}"=>$documento,
-                               "{verificar-fecha_inicio}"=>$archivo["fecha_editar_inicio"],
-                               "{verificar-fecha_cierre}"=>$archivo["fecha_editar_cierre"],
-                               "{verificar-fecha_informe}"=>$archivo["fecha_editar_informe"],
-                               "{verificar-codigo_barras}"=>$codigo_barras);     
+      		$this->model->actualizar_codigo_barras($codigo_barras, $archivo_id);
+      		$array_verificar = array("{verificar-archivo_id}"=>$archivo_id,
+                               		 "{verificar-tipo_id}"=>$tipo_id,
+                               		 "{verificar-documento}"=>$documento,
+                               		 "{verificar-fecha_inicio}"=>$archivo["fecha_editar_inicio"],
+                              		 "{verificar-fecha_cierre}"=>$archivo["fecha_editar_cierre"],
+                              		 "{verificar-fecha_informe}"=>$archivo["fecha_editar_informe"],
+                              		 "{verificar-codigo_barras}"=>$codigo_barras);     
       
 		  $this->view->mostrar_formulario_validar_tipo2($tipos_trabajo, $archivo, $array_verificar);
-    }
+    	}
 	}
   
-  function guardar_validacion_tipo1() {
+  	function guardar_validacion_tipo1() {
 		SessionHandling::check();
 		SessionHandling::checkGrupo(4);
 		$archivo_id = filter_input(INPUT_POST, "archivo_id");
@@ -705,22 +705,22 @@ class ArchivosController {
 		$codigo_barras = filter_input(INPUT_POST, "codigo_barras");
 		
 		$this->model->archivo_id = $archivo_id;
-    $array_archivo = $this->model->get();
-    $detalle = "ID: " . $array_archivo["archivo_id"] . "<br>Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
-    $detalle_email = "Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
+    	$array_archivo = $this->model->get();
+    	$detalle = "ID: " . $array_archivo["archivo_id"] . "<br>Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
+    	$detalle_email = "Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
 		$this->model->comentario = "Validado por {$_SESSION['sesion.denominacion']}";
 		$this->model->estado_id = 9; # Validado
 		$this->model->guardar_seguimiento();
 		$cod_mensaje = 2;
-    Array2Auditor()->saveAuditor('Guarda Validación de Documento', 'Documentos', $detalle);
-    # ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
-    //$this->envia_email_estado_documento('Documento Validado', $detalle_email, $archivo_id);
+	    Array2Auditor()->saveAuditor('Guarda Validación de Documento', 'Documentos', $detalle);
+	    # ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
+	    //$this->envia_email_estado_documento('Documento Validado', $detalle_email, $archivo_id);
 		header("Location: /sgd/archivos/listar_validar/{$cod_mensaje}");
 	}
   
-  function guardar_validacion_tipo2() {
+  	function guardar_validacion_tipo2() {
 		SessionHandling::check();
-    SessionHandling::checkGrupo(4);
+    	SessionHandling::checkGrupo(4);
 		$archivo_id = filter_input(INPUT_POST, "archivo_id");
 		$tipo_id = filter_input(INPUT_POST, "tipo_id");
 		$documento = filter_input(INPUT_POST, "documento");
@@ -734,36 +734,36 @@ class ArchivosController {
 		$code_bar_modificado = "*" . strtoupper($code_bar) . "*";
 		
 		$this->model->archivo_id = $archivo_id;
-    $array_archivo = $this->model->get();
-    $detalle = "ID: " . $array_archivo["archivo_id"] . "<br>Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
-    $detalle_email = "Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
-    $this->model = new Archivos;
-    $this->model->archivo_id = $archivo_id;
-    $this->model->comentario = "Validado por {$_SESSION['sesion.denominacion']}";
-    $this->model->estado_id = 9; # Validado
-    $this->model->guardar_seguimiento();
-    $cod_mensaje = 2;
-    Array2Auditor()->saveAuditor('Guarda Validación de Certificación', 'Documentos', $detalle);
-    # ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
-    //$this->envia_email_estado_documento('Documento Validado', $detalle_email, $archivo_id);
-		header("Location: /sgd/archivos/listar_validar/{$cod_mensaje}");
+	    $array_archivo = $this->model->get();
+	    $detalle = "ID: " . $array_archivo["archivo_id"] . "<br>Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
+	    $detalle_email = "Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
+	    $this->model = new Archivos;
+	    $this->model->archivo_id = $archivo_id;
+	    $this->model->comentario = "Validado por {$_SESSION['sesion.denominacion']}";
+	    $this->model->estado_id = 9; # Validado
+	    $this->model->guardar_seguimiento();
+	    $cod_mensaje = 2;
+	    Array2Auditor()->saveAuditor('Guarda Validación de Certificación', 'Documentos', $detalle);
+	    # ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
+	    //$this->envia_email_estado_documento('Documento Validado', $detalle_email, $archivo_id);
+			header("Location: /sgd/archivos/listar_validar/{$cod_mensaje}");
 	}
   
-  function validar($arg) {
+  	function validar($arg) {
 		SessionHandling::check();
-    SessionHandling::checkGrupo(4);
+    	SessionHandling::checkGrupo(4);
 		switch($arg[0]) {
 			case 1:
 				$array_msj = array("{mensaje}"=>"",
-													 "{display}"=>"none");
+								   "{display}"=>"none");
 				break;
 			case 2:
 				$array_msj = array("{mensaje}"=>"El documento fue validado correctamente!",
-													 "{display}"=>"show");
+								   "{display}"=>"show");
 				break;
 			case 3:
 				$array_msj = array("{mensaje}"=>"Existen incosistencias en los datos cargados. Por favor verifiquelos.",
-													 "{display}"=>"show");
+								   "{display}"=>"show");
 				break;
 		}
 		
@@ -774,19 +774,19 @@ class ArchivosController {
 	
 	function validar_certificacion($arg) {
 		SessionHandling::check();
-    SessionHandling::checkGrupo(4);
+    	SessionHandling::checkGrupo(4);
 		switch($arg[0]) {
 			case 1:
 				$array_msj = array("{mensaje}"=>"",
-													 "{display}"=>"none");
+								   "{display}"=>"none");
 				break;
 			case 2:
 				$array_msj = array("{mensaje}"=>"El documento fue validado correctamente!",
-													 "{display}"=>"show");
+								   "{display}"=>"show");
 				break;
 			case 3:
 				$array_msj = array("{mensaje}"=>"Existen incosistencias en los datos cargados. Por favor verifiquelos.",
-													 "{display}"=>"show");
+								   "{display}"=>"show");
 				break;
 		}
 		
@@ -804,7 +804,7 @@ class ArchivosController {
 		$this->view->consultar($archivo, $seguimiento, $argumentos[1]);
 	}
   
-  function consultar_control_admin($argumentos) {
+  	function consultar_control_admin($argumentos) {
 		SessionHandling::check();
 		$this->model->archivo_id = $argumentos[0];
 		$this->model->estado_id = $argumentos[1];
@@ -849,16 +849,16 @@ class ArchivosController {
 			$archivo_id = $this->model->verifica_codigo_barras();
 			
 			$this->model->archivo_id = $archivo_id;
-      $array_archivo = $this->model->get();
-      $detalle = "ID: " . $array_archivo["archivo_id"] . "<br>Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
-      $detalle_email = "Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
+      		$array_archivo = $this->model->get();
+      		$detalle = "ID: " . $array_archivo["archivo_id"] . "<br>Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
+      		$detalle_email = "Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
 			$this->model->comentario = "Validado por {$_SESSION['sesion.denominacion']}";
 			$this->model->estado_id = 9; # Validado
 			$this->model->guardar_seguimiento();
 			$cod_mensaje = 2;
-      Array2Auditor()->saveAuditor('Guarda Validación de Documento', 'Documentos', $detalle);
-      # ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
-      //$this->envia_email_estado_documento('Documento Validado', $detalle_email, $archivo_id);
+      		Array2Auditor()->saveAuditor('Guarda Validación de Documento', 'Documentos', $detalle);
+		    # ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
+		    //$this->envia_email_estado_documento('Documento Validado', $detalle_email, $archivo_id);
 		} else {
 			$cod_mensaje = 3;      
 		}
@@ -868,7 +868,7 @@ class ArchivosController {
 	
 	function guardar_validacion_certificacion() {
 		SessionHandling::check();
-    SessionHandling::checkGrupo(4);
+    	SessionHandling::checkGrupo(4);
 		$tipo_id = filter_input(INPUT_POST, "tipo_id");
 		$documento = filter_input(INPUT_POST, "documento");
 		$fecha_inicio = str_replace("-", "", filter_input(INPUT_POST, "fecha_inicio"));
@@ -885,18 +885,18 @@ class ArchivosController {
 			$archivo_id = $this->model->verifica_codigo_barras();
 			
 			$this->model->archivo_id = $archivo_id;
-      $array_archivo = $this->model->get();
-      $detalle = "ID: " . $array_archivo["archivo_id"] . "<br>Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
-      $detalle_email = "Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
-      $this->model = new Archivos;
+      		$array_archivo = $this->model->get();
+      		$detalle = "ID: " . $array_archivo["archivo_id"] . "<br>Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
+      		$detalle_email = "Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
+      		$this->model = new Archivos;
 			$this->model->archivo_id = $archivo_id;
 			$this->model->comentario = "Validado por {$_SESSION['sesion.denominacion']}";
 			$this->model->estado_id = 9; # Validado
 			$this->model->guardar_seguimiento();
 			$cod_mensaje = 2;
-      Array2Auditor()->saveAuditor('Guarda Validación de Certificación', 'Documentos', $detalle);
-      # ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
-      //$this->envia_email_estado_documento('Documento Validado', $detalle_email, $archivo_id);
+	      	Array2Auditor()->saveAuditor('Guarda Validación de Certificación', 'Documentos', $detalle);
+	      	# ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
+	      	//$this->envia_email_estado_documento('Documento Validado', $detalle_email, $archivo_id);
 		} else {
 			$cod_mensaje = 3;
 		}
@@ -908,10 +908,10 @@ class ArchivosController {
 		
 		$archivo_id = filter_input(INPUT_POST, "archivo_id");
 		$this->model->archivo_id = $archivo_id;
-    $array_archivo = $this->model->get();
-    $documento = $array_archivo["documento"];
-    $detalle = "ID: " . $array_archivo["archivo_id"] . "<br>Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $documento . "<br>Ejercicio: " . $array_archivo["ejercicio"];
-    $detalle_email = "Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $documento . "<br>Ejercicio: " . $array_archivo["ejercicio"];
+	    $array_archivo = $this->model->get();
+	    $documento = $array_archivo["documento"];
+	    $detalle = "ID: " . $array_archivo["archivo_id"] . "<br>Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $documento . "<br>Ejercicio: " . $array_archivo["ejercicio"];
+    	$detalle_email = "Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $documento . "<br>Ejercicio: " . $array_archivo["ejercicio"];
 		$this->model->comentario = filter_input(INPUT_POST, "comentario");
 		$this->model->estado_id = 2; # pendiente de revision
 		if($_FILES['archivo']['error'] == 0){
@@ -922,11 +922,11 @@ class ArchivosController {
 				if ($tamano < 2*MB) {
 					$this->model->guardar_seguimiento();
 					FileHandler::save_file($archivo, $this->model->archivo_id, $this->model->seguimiento_id);
-          $auditor_id = Array2Auditor()->saveAuditor('Se Reenvía Documento', 'Documentos', $detalle);
-          $comprobante = "{$archivo_id}-{$documento}-{$auditor_id}";
-          $_SESSION["sesion.comprobante_ingreso"] = $comprobante;
-          # ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
-          //$this->envia_email_estado_documento('Documento Pendiente de Revisión', $detalle_email, $archivo_id);
+			        $auditor_id = Array2Auditor()->saveAuditor('Se Reenvía Documento', 'Documentos', $detalle);
+			        $comprobante = "{$archivo_id}-{$documento}-{$auditor_id}";
+			        $_SESSION["sesion.comprobante_ingreso"] = $comprobante;
+			        # ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
+			        //$this->envia_email_estado_documento('Documento Pendiente de Revisión', $detalle_email, $archivo_id);
 					header("Location: /sgd/archivos/reingresar_documento/4");
 				} else {
 					header("Location: /sgd/archivos/reingresar_documento/3");	
@@ -936,9 +936,9 @@ class ArchivosController {
 			}
 		} else {
 			/*
-      $this->model->guardar_seguimiento();
+      		$this->model->guardar_seguimiento();
 			header("Location: /sgd/archivos/ver/{$archivo_id}/4");
-      */
+      		*/
 			header("Location: /sgd/archivos/reingresar_documento/9");
 		}
 	}
@@ -951,86 +951,83 @@ class ArchivosController {
 	
 	function revisar($argumentos) {
 		SessionHandling::check();
-    $session_grupo_id = $_SESSION['sesion.grupo_id'];
+    	$session_grupo_id = $_SESSION['sesion.grupo_id'];
      
-    if ($session_grupo_id == 3) {
-      $carpeta = $argumentos[0];
-      $archivo_id = $argumentos[0];
-      $archivo = $argumentos[1];
-      $this->model->archivo_id = $argumentos[0];
-      $array_archivo = $this->model->get();
-      $detalle = "ID: " . $array_archivo["archivo_id"] . "<br>Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
-      $detalle_email = "Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
-      $this->model->seguimiento_id = $argumentos[1];
-      $this->model->verificar_estado();
-      if($this->model->estado_id == 2){
-        $this->model->comentario = "Documento en revisión.";
-        $this->model->estado_id = 3; # En revisión
-        $this->model->guardar_seguimiento();	
-        Array2Auditor()->saveAuditor('Documento en Revisión', 'Documentos', $detalle);
-        # ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
-        //$this->envia_email_estado_documento('Documento en Revisión', $detalle_email, $archivo_id);
-      }
-      
-      FileHandler::get_file($carpeta."/".$archivo);
-    } else {
+    	if ($session_grupo_id == 3) {
+      		$carpeta = $argumentos[0];
+      		$archivo_id = $argumentos[0];
+	      	$archivo = $argumentos[1];
+	      	$this->model->archivo_id = $argumentos[0];
+	      	$array_archivo = $this->model->get();
+	      	$detalle = "ID: " . $array_archivo["archivo_id"] . "<br>Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
+	      	$detalle_email = "Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
+	      	$this->model->seguimiento_id = $argumentos[1];
+	      	$this->model->verificar_estado();
+	      	if($this->model->estado_id == 2){
+	        	$this->model->comentario = "Documento en revisión.";
+	        	$this->model->estado_id = 3; # En revisión
+	        	$this->model->guardar_seguimiento();	
+	        	Array2Auditor()->saveAuditor('Documento en Revisión', 'Documentos', $detalle);
+	        	# ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
+	        	//$this->envia_email_estado_documento('Documento en Revisión', $detalle_email, $archivo_id);
+	      	} 
+	      	FileHandler::get_file($carpeta."/".$archivo);
+    	} else {
 			print_r("<h2><center>Sólo los usuarios AUTORIZADORES pueden realizar esta acción!</h2></center>");exit;
-    }
-    
+    	}
 	}
   
-  function ver_archivo_blank($argumentos) {
-     $carpeta = $argumentos[0];
-     $archivo = $argumentos[1];
-     FileHandler::get_file($carpeta."/".$archivo);
-  }
+  	function ver_archivo_blank($argumentos) {
+     	$carpeta = $argumentos[0];
+     	$archivo = $argumentos[1];
+     	FileHandler::get_file($carpeta."/".$archivo);
+  	}
 
 	function confirmar() {
 		SessionHandling::check();
-    SessionHandling::checkGrupo(3);
-    $archivo_id = filter_input(INPUT_POST, 'archivo_id');
+    	SessionHandling::checkGrupo(3);
+    	$archivo_id = filter_input(INPUT_POST, 'archivo_id');
 		$this->model->archivo_id = $archivo_id;
-    $array_archivo = $this->model->get();
-    $detalle = "ID: " . $array_archivo["archivo_id"] . "<br>Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
-    $detalle_email = "Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
+    	$array_archivo = $this->model->get();
+    	$detalle = "ID: " . $array_archivo["archivo_id"] . "<br>Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
+    	$detalle_email = "Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
 		$this->model->estado_id = filter_input(INPUT_POST, 'estado_id');
 		if($this->model->estado_id == 6 AND $_POST['comentario']=='') {
-      #FIXME SI IN HERE IF IS NECESSARY A BAR CODE
+	      	#FIXME SI IN HERE IF IS NECESSARY A BAR CODE
 			$this->model->comentario = "Aceptado por {$_SESSION['sesion.denominacion']}";
-      Array2Auditor()->saveAuditor('Documento Aceptado', 'Documentos', $detalle);
-		  $this->model->guardar_seguimiento();
-      //$this->envia_email_estado_documento('Documento Aceptado', $detalle_email, $archivo_id);HOLA
-      header("Location: /sgd/archivos/autorizar/5");
+	      	Array2Auditor()->saveAuditor('Documento Aceptado', 'Documentos', $detalle);
+		  	$this->model->guardar_seguimiento();
+	      	//$this->envia_email_estado_documento('Documento Aceptado', $detalle_email, $archivo_id);HOLA
+	      	header("Location: /sgd/archivos/autorizar/5");
 		} elseif($this->model->estado_id == 6) {
-      #FIXME SI IN HERE IF IS NECESSARY A BAR CODE
+      		#FIXME SI IN HERE IF IS NECESSARY A BAR CODE
 			$this->model->comentario = filter_input(INPUT_POST, 'comentario');
-		  $this->model->guardar_seguimiento();
-      Array2Auditor()->saveAuditor('Documento Aceptado', 'Documentos', $detalle);
-      //$this->envia_email_estado_documento('Documento Aceptado', $detalle_email, $archivo_id);HOLA
-      header("Location: /sgd/archivos/autorizar/5");
+		  	$this->model->guardar_seguimiento();
+      		Array2Auditor()->saveAuditor('Documento Aceptado', 'Documentos', $detalle);
+      		//$this->envia_email_estado_documento('Documento Aceptado', $detalle_email, $archivo_id);HOLA
+      		header("Location: /sgd/archivos/autorizar/5");
 		} else {
+      		$this->model->comentario = filter_input(INPUT_POST, 'comentario');
+      		$this->model->guardar_seguimiento();
+      		Array2Auditor()->saveAuditor('Documento Observado', 'Documentos', $detalle);
+      		if($_FILES['archivo']['error']==0) {
+			  	$archivo = $_FILES['archivo'];
+			  	$formato = $archivo['type'];
+			  	$tamano = $archivo['size'];
       
-      $this->model->comentario = filter_input(INPUT_POST, 'comentario');
-      $this->model->guardar_seguimiento();
-      Array2Auditor()->saveAuditor('Documento Observado', 'Documentos', $detalle);
-      if($_FILES['archivo']['error']==0) {
-			  $archivo = $_FILES['archivo'];
-			  $formato = $archivo['type'];
-			  $tamano = $archivo['size'];
-      
-        $limite_filesize = 20 * 1048576;
-        if ($tamano < $limite_filesize) {
-          FileHandler::save_file($archivo, $archivo_id, $this->model->seguimiento_id);  
-        } 
-		  } 
+        		$limite_filesize = 20 * 1048576;
+        		if ($tamano < $limite_filesize) {
+          			FileHandler::save_file($archivo, $archivo_id, $this->model->seguimiento_id);  
+        		} 
+		  	} 
 			  
-      //$this->envia_email_estado_documento('Documento Observado', $detalle_email, $archivo_id);HOLA
-      header("Location: /sgd/archivos/autorizar/4");
+      		//$this->envia_email_estado_documento('Documento Observado', $detalle_email, $archivo_id);HOLA
+      		header("Location: /sgd/archivos/autorizar/4");
 		}
-  }
+  	}
 	
   
-  function confirmar_evaluacion() {
+  	function confirmar_evaluacion() {
 		SessionHandling::check();
 		SessionHandling::checkGrupo(0);
     
@@ -1038,40 +1035,40 @@ class ArchivosController {
 		$numero_protocolo = filter_input(INPUT_POST, "numero_protocolo");
 		$archivo_id = filter_input(INPUT_POST, 'archivo_id');
 		$this->model->archivo_id = $archivo_id;
-    $archivo = $this->model->get();
-    $detalle = "ID: " . $archivo["archivo_id"] . "<br>Razón Social: " . $archivo["nombre"] . "<br>CUIT: " . $archivo["documento"] . "<br>Ejercicio: " . $archivo["ejercicio"];
-    $detalle_email = "Razón Social: " . $archivo["nombre"] . "<br>CUIT: " . $archivo["documento"] . "<br>Ejercicio: " . $archivo["ejercicio"];
+    	$archivo = $this->model->get();
+    	$detalle = "ID: " . $archivo["archivo_id"] . "<br>Razón Social: " . $archivo["nombre"] . "<br>CUIT: " . $archivo["documento"] . "<br>Ejercicio: " . $archivo["ejercicio"];
+    	$detalle_email = "Razón Social: " . $archivo["nombre"] . "<br>CUIT: " . $archivo["documento"] . "<br>Ejercicio: " . $archivo["ejercicio"];
 		if($_POST['comentario']=='') {
 			if ($estado_id == 2 ) {
 				$comentario = "Ingresado por {$_SESSION['sesion.denominacion']}";	
-        Array2Auditor()->saveAuditor('Documento Ingresado', 'Documentos', $detalle);
-        # ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
-        //$this->envia_email_estado_documento('Documento Ingresado', $detalle_email, $archivo_id);
+        		Array2Auditor()->saveAuditor('Documento Ingresado', 'Documentos', $detalle);
+        		# ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
+        		//$this->envia_email_estado_documento('Documento Ingresado', $detalle_email, $archivo_id);
 			} else {
-        Array2Auditor()->saveAuditor('Documento Legalizado', 'Documentos', $detalle);
+        		Array2Auditor()->saveAuditor('Documento Legalizado', 'Documentos', $detalle);
 				$comentario = "Legalizado por {$_SESSION['sesion.denominacion']}";
-        # ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
-        //$this->envia_email_estado_documento('Documento Legalizado', $detalle_email, $archivo_id);
+ 		 	    # ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
+        		//$this->envia_email_estado_documento('Documento Legalizado', $detalle_email, $archivo_id);
 			}
 		} else {
-      if ($estado_id == 2 ) {
+      		if ($estado_id == 2 ) {
 				$comentario = "Ingresado por {$_SESSION['sesion.denominacion']}";	
-        Array2Auditor()->saveAuditor('Documento Ingresado', 'Documentos', $detalle);
-        # ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
-        //$this->envia_email_estado_documento('Documento Ingresado', $detalle_email, $archivo_id);
+        		Array2Auditor()->saveAuditor('Documento Ingresado', 'Documentos', $detalle);
+        		# ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
+        		//$this->envia_email_estado_documento('Documento Ingresado', $detalle_email, $archivo_id);
 			} elseif ($estado_id == 7) {
-        Array2Auditor()->saveAuditor('Documento Rechazado', 'Documentos', $detalle);
-			  $comentario = filter_input(INPUT_POST, 'comentario');
-        //$this->envia_email_estado_documento('Documento Rechazado', $detalle_email, $archivo_id);HOLA
-      } else {
-        Array2Auditor()->saveAuditor('Documento Legalizado', 'Documentos', $detalle);
+        		Array2Auditor()->saveAuditor('Documento Rechazado', 'Documentos', $detalle);
+			  	$comentario = filter_input(INPUT_POST, 'comentario');
+        		//$this->envia_email_estado_documento('Documento Rechazado', $detalle_email, $archivo_id);HOLA
+      		} else {
+        		Array2Auditor()->saveAuditor('Documento Legalizado', 'Documentos', $detalle);
 				$comentario = "Legalizado por {$_SESSION['sesion.denominacion']}";
-        # ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
-        //$this->envia_email_estado_documento('Documento Legalizado', $detalle_email, $archivo_id);
-      }
+        		# ANULO ENVÍO DE CORREO INFORMANDO ESTADO DE DOCUMENTO
+        		//$this->envia_email_estado_documento('Documento Legalizado', $detalle_email, $archivo_id);
+      		}
 		}
 		
-    $this->model = new Archivos();
+    	$this->model = new Archivos();
 		$this->model->archivo_id = $archivo_id;
 		$this->model->numero_protocolo = $numero_protocolo;
 		$this->model->estado_id = $estado_id;
@@ -1150,15 +1147,15 @@ class ArchivosController {
   
   	function reporte_seguimientos_fecha() {
 		SessionHandling::check();
-    SessionHandling::checkGrupo(4);
+    	SessionHandling::checkGrupo(4);
     
-    $desde = filter_input(INPUT_POST, 'desde');
-    $hasta = filter_input(INPUT_POST, 'hasta');
-    $mod_date = strtotime($hasta."+ 1 days");
-    $nuevo_hasta = date("Y-m-d",$mod_date);
-    
-    $datos = $this->model->listar_seguimientos_archivos_fecha($desde, $nuevo_hasta);
-    $array_encabezados = array('DOCUMENTO ID', 'DENOMINACIÓN', 'ESTADO', 'FECHA', 'COMENTARIO');
+	    $desde = filter_input(INPUT_POST, 'desde');
+	    $hasta = filter_input(INPUT_POST, 'hasta');
+	    $mod_date = strtotime($hasta."+ 1 days");
+	    $nuevo_hasta = date("Y-m-d",$mod_date);
+	    
+	    $datos = $this->model->listar_seguimientos_archivos_fecha($desde, $nuevo_hasta);
+	    $array_encabezados = array('DOCUMENTO ID', 'DENOMINACIÓN', 'ESTADO', 'FECHA', 'COMENTARIO');
 		$array_exportacion = array();
 		$array_exportacion[] = $array_encabezados;
 		foreach ($datos as $clave=>$valor) {
@@ -1232,12 +1229,12 @@ class ArchivosController {
 	function descarga_txt_otros($argumentos) {
 		$this->model->archivo_id = $argumentos[0];
 		$datos = $this->model->exportar_otros();
-    $array_archivo = $this->model->get();
-    $detalle = "ID: " . $array_archivo["archivo_id"] . "<br>Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
+    	$array_archivo = $this->model->get();
+    	$detalle = "ID: " . $array_archivo["archivo_id"] . "<br>Razón Social: " . $array_archivo["nombre"] . "<br>CUIT: " . $array_archivo["documento"] . "<br>Ejercicio: " . $array_archivo["ejercicio"];
 		$datos["importe"] = str_replace(".",",",$datos["importe"]);
 		$filecontent = "";
 		foreach ($datos as $clave=>$valor) $filecontent .= "{$valor};";
-    Array2Auditor()->saveAuditor('Exporta Otros', 'Documentos', $detalle);
+    	Array2Auditor()->saveAuditor('Exporta Otros', 'Documentos', $detalle);
 		
 		$downloadfile = "archivo_siap.txt";
 		header("Content-disposition: attachment; filename=$downloadfile");
@@ -1249,10 +1246,10 @@ class ArchivosController {
 		echo $filecontent;
 	}
   
-  function exportar($argumentos) {
+  	function exportar($argumentos) {
 		$this->model->estado_id = $argumentos[0];
-    $datos = $this->model->listar_estado_reporte();
-    $array_encabezados = array('DENOMINACIÓN', 'DOCUMENTO', 'MATRÍCULA', 'USUARIO', 'FECHA', 'AUTORIZADOR', 'COMENTARIO');
+    	$datos = $this->model->listar_estado_reporte();
+    	$array_encabezados = array('DENOMINACIÓN', 'DOCUMENTO', 'MATRÍCULA', 'USUARIO', 'FECHA', 'AUTORIZADOR', 'COMENTARIO');
 		$array_exportacion = array();
 		$array_exportacion[] = $array_encabezados;
 		foreach ($datos as $clave=>$valor) {
@@ -1268,13 +1265,13 @@ class ArchivosController {
 			$array_exportacion[] = $array_temp;
 		}
     
-    Array2Auditor()->saveAuditor('Exporta Reporte', 'Documentos');
-    ExcelReport()->extraer_informe($array_exportacion, "Reporte por estado");
-  }
+   	 	Array2Auditor()->saveAuditor('Exporta Reporte', 'Documentos');
+    	ExcelReport()->extraer_informe($array_exportacion, "Reporte por estado");
+  	}
 	
-  function genera_comprobante() {
-    Array2PDF()->createPDF($_SESSION["sesion.comprobante_ingreso"]);    
-  }
+  	function genera_comprobante() {
+    	Array2PDF()->createPDF($_SESSION["sesion.comprobante_ingreso"]);    
+  	}
   
 	function verificar_ejercicio($argumentos) {
 		SessionHandling::check();
@@ -1286,9 +1283,9 @@ class ArchivosController {
 		print $rst;
 	}
   
-  function info() {
-    //print phpinfo();
-  }
+  	function info() {
+    	//print phpinfo();
+  	}
 	
 	function verificar_cuit($argumentos) {
 		SessionHandling::check();
@@ -1313,24 +1310,23 @@ class ArchivosController {
 		if ($resto==0) {
 			if ($resto==$cadena[10]) {
 				print "Si";
-      } else {
+	      	} else {
 				print "No";
-      }
-    } else if ($resto==1) {
+	      	}
+    	} else if ($resto==1) {
 			if ($cadena[10] == 9 AND $cadena[0] == 2 AND $cadena[1] == 3) {
 				print "Si";
 			} else if ($cadena[10]==4 AND $cadena[0]==2 AND $cadena[1]==3) {
 				print "Si";
-      }
+      		}
 		} elseif ($cadena[10] == (11-$resto)) {
 			print "Si";
-    } else {
+    	} else {
 			print "No";
-    }
-		
+    	}	
 	}
   
-  function verificar_cuit_guardar($argumentos) {
+  	function verificar_cuit_guardar($argumentos) {
 		SessionHandling::check();
 		$cuit = $argumentos[0];
 		$cuit = str_replace("-", "", $cuit);
@@ -1353,35 +1349,35 @@ class ArchivosController {
 		if ($resto==0) {
 			if ($resto==$cadena[10]) {
 				return "Si";
-      } else {
+      		} else {
 				return "No";
-      }
-    } else if ($resto==1) {
+      		}
+    	} else if ($resto==1) {
 			if ($cadena[10] == 9 AND $cadena[0] == 2 AND $cadena[1] == 3) {
 				return "Si";
 			} else if ($cadena[10]==4 AND $cadena[0]==2 AND $cadena[1]==3) {
 				return "Si";
-      }
+      		}
 		} elseif ($cadena[10] == (11-$resto)) {
 			return "Si";
-    } else {
+    	} else {
 			return "No";
-    }		
+    	}		
 	}
   
-  function envia_email_estado_documento($estado, $documento_detalle, $archivo_id) {
+  	function envia_email_estado_documento($estado, $documento_detalle, $archivo_id) {
 		SessionHandling::check();
-    require_once "tools/mailhandling.php";
-    $session_grupo_id = $_SESSION['sesion.grupo_id'];
-    $session_usuario_id = $_SESSION['sesion.usuario_id'];
-    //if ($session_grupo_id == 99 || $session_usuario_id == 994) {
-      $datos_matriculado = $this->model->traer_correo_matriculado_archivo_id($archivo_id);
-      if (!empty($datos_matriculado)) {
-        if ($datos_matriculado[0]['correoelectronico'] != ' ') {
-          $emailHelper = new EmailHelper();
-          //$emailHelper->envia_email_estado_documento($datos_matriculado, $documento_detalle, $estado);HOLA
-        }
-      }
-  }
+    	require_once "tools/mailhandling.php";
+    	$session_grupo_id = $_SESSION['sesion.grupo_id'];
+    	$session_usuario_id = $_SESSION['sesion.usuario_id'];
+    	//if ($session_grupo_id == 99 || $session_usuario_id == 994) {
+      	$datos_matriculado = $this->model->traer_correo_matriculado_archivo_id($archivo_id);
+      	if (!empty($datos_matriculado)) {
+        	if ($datos_matriculado[0]['correoelectronico'] != ' ') {
+          		$emailHelper = new EmailHelper();
+          		//$emailHelper->envia_email_estado_documento($datos_matriculado, $documento_detalle, $estado);HOLA
+        	}
+      	}
+  	}
 }
 ?>
