@@ -2,3 +2,4 @@ logs/
 settings.php
 controller.php
 core/database.php
+private/
