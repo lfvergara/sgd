@@ -1021,7 +1021,7 @@ class ArchivosController {
         		} 
 		  	} 
 			  
-      		//$this->envia_email_estado_documento('Documento Observado', $detalle_email, $archivo_id);
+      		$this->envia_email_estado_documento('Documento Observado', $detalle_email, $archivo_id);
       		header("Location: /" . APP_NAME . "/archivos/autorizar/4");
 		}
   	}
