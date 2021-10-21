@@ -998,14 +998,14 @@ class ArchivosController {
 	      	Array2Auditor()->saveAuditor('Documento Aceptado', 'Documentos', $detalle);
 		  	$this->model->guardar_seguimiento();
 	      	$this->envia_email_estado_documento('Documento Aceptado', $detalle_email, $archivo_id);
-	      	header("Location: /sgd/archivos/autorizar/5");
+	      	header("Location: /" . APP_NAME . "/archivos/autorizar/5");
 		} elseif($this->model->estado_id == 6) {
       		#FIXME SI IN HERE IF IS NECESSARY A BAR CODE
 			$this->model->comentario = filter_input(INPUT_POST, 'comentario');
 		  	$this->model->guardar_seguimiento();
       		Array2Auditor()->saveAuditor('Documento Aceptado', 'Documentos', $detalle);
       		$this->envia_email_estado_documento('Documento Aceptado', $detalle_email, $archivo_id);
-      		header("Location: /sgd/archivos/autorizar/5");
+      		header("Location: /" . APP_NAME . "/archivos/autorizar/5");
 		} else {
       		$this->model->comentario = filter_input(INPUT_POST, 'comentario');
       		$this->model->guardar_seguimiento();
@@ -1021,8 +1021,8 @@ class ArchivosController {
         		} 
 		  	} 
 			  
-      		$this->envia_email_estado_documento('Documento Observado', $detalle_email, $archivo_id);
-      		header("Location: /sgd/archivos/autorizar/4");
+      		//$this->envia_email_estado_documento('Documento Observado', $detalle_email, $archivo_id);
+      		header("Location: /" . APP_NAME . "/archivos/autorizar/4");
 		}
   	}
 	
