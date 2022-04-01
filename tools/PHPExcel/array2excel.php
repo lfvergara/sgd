@@ -78,8 +78,15 @@ class ExcelReport extends View {
     header('Content-Disposition: attachment;filename="infSyntecom.xls"');
     header('Cache-Control: max-age=0');
 
+    //$objWriter = PHPExcel_Settings::setZipClass(PHPExcel_Settings::PCLZIP);
+    
     $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
-    $objWriter->save('php://output');
+    $filePath = '' . rand(0, getrandmax()) . rand(0, getrandmax()) . ".tmp";
+    $objWriter->save($filePath);
+    readfile($filePath);
+    unlink($filePath);
+    exit;
+    //$objWriter->save('php://output');
   }
   
   function estilo() {
